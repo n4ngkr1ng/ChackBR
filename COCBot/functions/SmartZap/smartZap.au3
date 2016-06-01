@@ -85,19 +85,9 @@ Func getSpellOffset()
 EndFunc   ;==>getSpellOffset
 
 Func zapDrill($x, $y, $xOffset, $yOffset)
-	Local $barPosition = unitLocation($eLSpell)
-	Local $spellCount = unitCount($eLSpell)
+	Local $dropPoint = convertToPoint($x + $xOffset, $y + $yOffset)
 
-	If $barPosition <> -1 And $spellCount >= 1 Then ; Check to see if we have a spell trained
-		If _Sleep(100) Then Return
-		If $debugSetlog = 1 Then SetLog("Dropping " & getTranslatedTroopName($eLSpell) & " in slot " & $barPosition, $COLOR_BLUE)
-
-		SelectDropTroop($barPosition) ; Select Spell
-		SetLog("Dropping " & getTranslatedTroopName($eLSpell) & " on button " & ($barPosition + 1) & " at " & $x + $xOffset & "," & $y + $yOffset, $COLOR_BLUE)
-		AttackClick($x + $xOffset, $y + $yOffset, 1, 0, 0)
-
-		$result = True
-	EndIf
+	dropSpell($dropPoint, $eLSpell, 1)
 EndFunc   ;==>zapDrill
 
 Func smartZap($minDE = -1)
@@ -179,7 +169,7 @@ Func smartZap($minDE = -1)
 	; Loop while you still have spells and the first drill in the array has Dark Elixir, if you are town hall 7 or higher
 	While IsAttackPage() And $numSpells > 0 And $aDarkDrills[0][3] <> -1 And $spellAdjust <> -1
 		CheckHeroesHealth()
-		
+
 		; Store the DE value before any Zaps are done.
 		$oldSearchDark = $searchDark
 		; If you have max lightning spells, drop lightning on any level DE drill
@@ -232,18 +222,11 @@ Func smartZap($minDE = -1)
 			Return $performedZap
 		EndIf
 
-		$strikeGain = $oldSearchDark - $searchDark
-		If $aDarkDrills[0][2] <> -1 Then
-			$expectedDE = $drillLevelSteal[($aDarkDrills[0][2] - 1)] * 0.75
-		Else
-			$expectedDE = -1
-		EndIf
-
 		; Check to make sure we actually zapped
 		If $skippedZap = False Then
 			$strikeGain = $oldSearchDark - $searchDark
 			If $aDarkDrills[0][2] <> -1 Then
-				$expectedDE = $DrillLevelSteal[($aDarkDrills[0][2] - 1)] * 0.75
+				$expectedDE = $drillLevelSteal[($aDarkDrills[0][2] - 1)] * 0.75
 			Else
 				$expectedDE = -1
 			EndIf

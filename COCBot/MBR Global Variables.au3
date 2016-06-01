@@ -1463,6 +1463,26 @@ Global $iChkDontRemove, $chkDontRemove
 
 ; Close while training variables
 Global $ichkCloseTraining = 1
+Global $minTrainAddition = 10, $maxTrainAddition = 20
+Global $LeaveCoCOpen = 0
+Global $CloseCoCGame = 1
+Global $RandomCoCOpen = 0
+Global $RandomCloseTraining = 0
+Global $RandomCloseTraining2 = 0
+
+; Sleep at night variables
+Global $ichkCloseNight = 1
+Global $sleepStart = 0, $sleepEnd = 8
+Global $nextSleepStart = -999, $nextSleepEnd = -999
+
+; Daily attack variables
+Global $ichkLimitAttacks = 1
+Global $rangeAttacksStart = 20, $rangeAttacksEnd = 25
+Global $dailyAttacks = 0, $dailyAttackLimit = 0
+
+; Randomization of functions
+Global $RandomTimer = True
+Global $sTimerRandomHalt
 
 ; SmartZap GUI variables - Added by LunaEclipse
 Global $ichkSmartZap = 1

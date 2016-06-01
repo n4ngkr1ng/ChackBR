@@ -198,6 +198,8 @@
 #include "functions\Pixels\boolPixelSearch.au3"
 #include "functions\Pixels\isInsideDiamond.au3"
 
+#include "functions\Psychic Octopus\psychicOctopus.au3"
+
 #include "functions\Read Text\BuildingInfo.au3"
 #include "functions\Read Text\getOcr.au3"
 #include "functions\Read Text\getPBTime.au3"
@@ -254,6 +256,10 @@
 ; Attack files - Added by LunaEclipse
 #include "functions\Attack\attackFunctions.au3"
 #include "functions\Attack\unitInfo.au3"
+
+; Deployment files - Added by LunaEclipse
+#include "functions\Attack\Deployment\troopDeployment.au3"
+#include "functions\Attack\Deployment\deployArray.au3"
 
 ; SmartZap files - Added by LunaEclipse
 #include "functions\SmartZap\drillSearch.au3"

@@ -47,7 +47,12 @@ EndIf
 #include "COCBot\MBR Global Variables.au3"
 #include "COCBot\functions\Config\ScreenCoordinates.au3"
 
-Local $sModversion = "Chk_1002"
+Local $sModversion
+$sModversion = "Chk_0000" ; MyBot.run v6.0.0
+$sModversion = "Chk_1000" ; MyBot.run v6.1.0
+$sModversion = "Chk_1100" ; MyBot.run v6.1.1
+$sModversion = "Chk_1101" ; Fix Donations
+$sModversion = "Chk_1102" ; Add Close While Training
 $sBotVersion = "v6.1.1" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
 $sBotTitle = "My Bot " & $sBotVersion & " " & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 
@@ -395,6 +400,8 @@ Func Idle() ;Sequence that runs until Full Army
 		$iCollectCounter = $iCollectCounter + 1
 		If $CommandStop = -1 Then
 			Train()
+				; Close While Training
+				checkRemainingTraining()
 				If $Restart = True Then ExitLoop
 				If _Sleep($iDelayIdle1) Then ExitLoop
 				checkMainScreen(False)
