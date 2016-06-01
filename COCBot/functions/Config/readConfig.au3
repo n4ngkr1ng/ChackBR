@@ -1011,6 +1011,18 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 		$AndroidAdbClicksEnabled = IniRead($config, "android", "adb.clicks.enabled", ($AndroidAdbClicksEnabled ? "1" : "0")) = "1"
 		$AndroidAdbClicksTroopDeploySize = Int(IniRead($config, "android", "adb.clicks.troop.deploy.size", $AndroidAdbClicksTroopDeploySize))
 
+		; by AwessomeGamer
+		IniReadS($iChkDontRemove, $config, "troop", "DontRemove", "0")
+
+		; SmartZap Settings - Added by LunaEclipse
+		$ichkSmartZap = IniRead($config, "SmartZap", "UseSmartZap", "1")
+		$ichkSmartZapDB = IniRead($config, "SmartZap", "ZapDBOnly", "1")
+		$ichkSmartZapSaveHeroes = IniRead($config, "SmartZap", "THSnipeSaveHeroes", "1")
+		$itxtMinDE = IniRead($config, "SmartZap", "MinDE", "250")
+
+		; Close When Training Settings
+		$ichkCloseTraining = Number(IniRead($config, "Close When Training", "Enabled", "1"))
+
 	Else
 		Return False
 	EndIf

@@ -322,3 +322,46 @@ Func chkBoostBarracksHoursE2()
 	Sleep(300)
 	GUICtrlSetState($chkBoostBarracksHoursE2, $GUI_UNCHECKED)
 EndFunc   ;==>chkBoostBarracksHoursE2
+
+; SmartZap Settings
+Func chkSmartLightSpell()
+    If GUICtrlRead($chkSmartLightSpell) = $GUI_CHECKED Then
+        GUICtrlSetState($chkSmartZapDB, $GUI_ENABLE)
+        GUICtrlSetState($chkSmartZapSaveHeroes, $GUI_ENABLE)
+        GUICtrlSetState($txtMinDark, $GUI_ENABLE)
+        $ichkSmartZap = 1
+    Else
+        GUICtrlSetState($chkSmartZapDB, $GUI_DISABLE)
+        GUICtrlSetState($chkSmartZapSaveHeroes, $GUI_DISABLE)
+        GUICtrlSetState($txtMinDark, $GUI_DISABLE)
+        $ichkSmartZap = 0
+    EndIf
+EndFunc   ;==>chkSmartLightSpell
+
+Func chkSmartZapDB()
+    If GUICtrlRead($chkSmartZapDB) = $GUI_CHECKED Then
+        $ichkSmartZapDB = 1
+    Else
+        $ichkSmartZapDB = 0
+    EndIf
+EndFunc   ;==>chkSmartZapDB
+
+Func chkSmartZapSaveHeroes()
+    If GUICtrlRead($chkSmartZapSaveHeroes) = $GUI_CHECKED Then
+        $ichkSmartZapSaveHeroes = 1
+    Else
+        $ichkSmartZapSaveHeroes = 0
+    EndIf
+EndFunc   ;==>chkSmartZapSaveHeroes
+
+Func txtMinDark()
+	$itxtMinDE = GUICtrlRead($txtMinDark)
+EndFunc   ;==>txtMinDark
+
+Func chkFastADBClicks()
+	If GUICtrlRead($chkFastADBClicks) = $GUI_CHECKED Then
+		$AndroidAdbClicksEnabled = True
+	Else
+		$AndroidAdbClicksEnabled = False
+	EndIf
+EndFunc   ;==>chkFastADBClicks

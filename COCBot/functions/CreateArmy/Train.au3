@@ -511,13 +511,18 @@ Func Train()
 						If $icount = 7 Then ExitLoop
 					WEnd
 				EndIf
-				$icount = 0
-				While Not _ColorCheck(_GetPixelColor(599, 202 + $midOffsetY, True), Hex(0xD0D0C0, 6), 20) ; while not disappears  green arrow
-					If Not (IsTrainPage()) Then Return
-					Click(568, 177 + $midOffsetY, 10, 0, "#0273") ; Remove Troops in training
-					$icount += 1
-					If $icount = 100 Then ExitLoop
-				WEnd
+
+				; by AwessomeGamer
+				If $iChkDontRemove = 0 Then
+					$icount = 0
+					While Not _ColorCheck(_GetPixelColor(599, 202 + $midOffsetY, True), Hex(0xD0D0C0, 6), 20) ; while not disappears  green arrow
+						If Not (IsTrainPage()) Then Return
+						Click(568, 177 + $midOffsetY, 10, 0, "#0273") ; Remove Troops in training
+						$icount += 1
+						If $icount = 100 Then ExitLoop
+					WEnd
+				EndIf
+
 				If $debugsetlogTrain = 1 And $icount = 100 Then SetLog("Train warning 6", $COLOR_PURPLE)
 			EndIf
 			If _Sleep($iDelayTrain2) Then Return
@@ -932,14 +937,19 @@ Func Train()
 							If $icount = 7 Then ExitLoop
 						WEnd
 					EndIf
-					$icount = 0
-					While Not _ColorCheck(_GetPixelColor(599, 202 + $midOffsetY, True), Hex(0xD0D0C0, 6), 20) ; while not disappears  green arrow
-						If Not (IsTrainPage()) Then Return ;exit if no train page
-						Click(568, 177 + $midOffsetY, 10, 0, "#0287") ; Remove Troops in training
-						$icount += 1
-						If $icount = 100 Then ExitLoop
-						If $RunState = False Then Return
-					WEnd
+
+					; by AwessomeGamer
+					If $iChkDontRemove = 0 Then
+						$icount = 0
+						While Not _ColorCheck(_GetPixelColor(599, 202 + $midOffsetY, True), Hex(0xD0D0C0, 6), 20) ; while not disappears  green arrow
+							If Not (IsTrainPage()) Then Return ;exit if no train page
+							Click(568, 177 + $midOffsetY, 10, 0, "#0287") ; Remove Troops in training
+							$icount += 1
+							If $icount = 100 Then ExitLoop
+							If $RunState = False Then Return
+						WEnd
+					EndIf
+
 					If $debugsetlogTrain = 1 And $icount = 100 Then SetLog("Train warning 9", $COLOR_PURPLE)
 				EndIf
 				If _Sleep($iDelayTrain1) Then Return

@@ -22,7 +22,7 @@ $hGUI_Profiles = GUICreate("", $_GUI_MAIN_WIDTH - 28, $_GUI_MAIN_HEIGHT - 255 - 
 GUISwitch($hGUI_Profiles)
 
 Local $x = 20, $y = 25
-	$grpProfiles = GUICtrlCreateGroup(GetTranslated(637,1, "Switch Profiles"), $x - 20, $y - 20, 440, 360)
+	$grpProfiles = GUICtrlCreateGroup(GetTranslated(637,1, "Switch Profiles"), $x - 20, $y - 20, 440, 160)
 		;$y -= 5
 		$x -= 5
 		;$lblProfile = GUICtrlCreateLabel(GetTranslated(7,27, "Current Profile") & ":", $x, $y, -1, -1)
@@ -112,4 +112,17 @@ Local $x = 20, $y = 25
 				GUICtrlSetState(-1, $GUI_ENABLE)
 			EndIf
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+	; Close When Training Settings
+Local $x = 20, $y = 195
+	$grpTrainingClose = GUICtrlCreateGroup("Training Settings", $x - 20, $y - 20, 440, 190)
+		$x -= 5
+		GUICtrlCreateIcon ($pIconLib, $eIcnSleepMode, $x - 10, $y + 10, 48, 48)
+		$chkUseTrainingClose = GUICtrlCreateCheckbox("Enable Close While Training", $x + 50, $y - 5, -1, -1)
+			$txtTip = "Enable this option to cause the bot to close when there is more than 2 mins remaining on training times." & @CRLF & @CRLF & _
+				      "     Doctor's Recommendation: Use this setting to reduce overall time spent online."
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetOnEvent(-1, "chkUseTrainingClose")
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 ;GUISetState()
