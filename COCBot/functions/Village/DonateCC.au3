@@ -610,7 +610,7 @@ Func DonateWindow($Open = True)
 ;		Click($DonatePixel[0] + 50, $DonatePixel[1] + 10, 1, 0, "#0174")
 
 	If _ColorCheck(_GetPixelColor($DonatePixel[0], $DonatePixel[1], True), Hex(0xFFFFFF, 6), 5) Then
-		Click($DonatePixel[0] - 40, $DonatePixel[1] + 10, 1, 0, "#0174")
+		Click($DonatePixel[0] - 12, $DonatePixel[1] + 10, 1, 0, "#0174")
 	Else
 		If $debugSetlog = 1 Then SetLog("Could not find the Donate Button!", $COLOR_PURPLE)
 		Return False
