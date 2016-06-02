@@ -144,11 +144,11 @@ Func checkRemainingTraining()
 
 	; Check if the Remaining time is less than 5 minutes
 	If $iRemainingTimeTroops < 6 Then 
-		Setlog( "Skip CCWT, Train Time < 5 Minutes: " & $iRemainingTimeTroops )
+		Setlog( "Skip CCWT, Train Time < 5 Minutes: " & $iRemainingTimeTroops, $COLOR_BLUE)
 		Return
 	Else
 		If $iRemainingTimeTroops > 15 Then
-			Setlog( "Calculated Train Time (Shrink to 15): " & $iRemainingTimeTroops & " Minutes" )
+			Setlog( "Calculated Train Time (Shrink to 15): " & $iRemainingTimeTroops & " Minutes", $COLOR_BLUE)
 			$iRemainingTimeTroops = 15
 		Endif
 	Endif

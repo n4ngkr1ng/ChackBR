@@ -14,7 +14,7 @@
 ; ===============================================================================================================================
 
 Func getDeploymentFileTroopName($kind)
-    ; Troop string as an array
+	; Troop string as an array
 	; This order must exactly match the troops enum from MBR Global Variables.au3
 	Local $result[$eDeployUnused + 1] = [	"$eBarb", _
 						"$eArch", _
