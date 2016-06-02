@@ -1022,7 +1022,7 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 
 		; Close When Training Settings
 		$ichkCloseTraining = Number(IniRead($config, "Close When Training", "Enabled", "1"))
-		$minTrainAddition = Number(IniRead($config, "Close When Training", "AdditionMin", "0"))
+		$minTrainAddition = Number(IniRead($config, "Close When Training", "AdditionMin", "1"))
 		$maxTrainAddition = Number(IniRead($config, "Close When Training", "AdditionMax", "5"))
 		$LeaveCoCOpen = IniRead($config, "Leave CoC Open", "Enabled", "0")
 		$CloseCoCGame = IniRead($config, "Close CoC Game", "Enabled", "1")

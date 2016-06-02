@@ -86,6 +86,11 @@ Func getSpellOffset()
 	Return $result
 EndFunc   ;==>getSpellOffset
 
+;Func zapDrill($x, $y, $xOffset, $yOffset)
+;	Local $dropPoint = convertToPoint($x + $xOffset, $y + $yOffset)
+;
+;	dropSpell($dropPoint, $eLSpell, 1)
+;EndFunc   ;==>zapDrill
 
 Func smartZap($minDE = -1)
 	Local $searchDark, $oldSearchDark = 0, $numSpells, $skippedZap = True, $performedZap = False, $dropPoint
@@ -97,16 +102,15 @@ Func smartZap($minDE = -1)
 	If $minDE = -1 Then $minDE = Number($itxtMinDE)
 
 	; Get Dark Elixir value, if no DE value exists, exit.
-	;$searchDark = getDarkElixir()
+	; $searchDark = getDarkElixir()
 	$searchDark = getDarkElixirVillageSearch(45, 125)
 	If Number($searchDark) = 0 Then
 		SetLog("No Dark Elixir so lets just exit!", $COLOR_FUCHSIA)
 		Return $performedZap
 	; Check to see if the DE Storage is already full
-	;ElseIf getDarkElixirStorageFull() Then
-	;ElseIf Number(getDarkElixirVillageSearch(45,125)) =  Number($searchDark) Then
-		;SetLog("Your Dark Elixir Storage is full, no need to zap!", $COLOR_FUCHSIA)
-		;Return $performedZap
+	; ElseIf getDarkElixirStorageFull() Then
+	;	SetLog("Your Dark Elixir Storage is full, no need to zap!", $COLOR_FUCHSIA)
+	;	Return $performedZap
 	; Check to make sure the account is high enough level to store DE.
 	ElseIf $iTownHallLevel < 7 Then
 		SetLog("You do not have the ability to store Dark Elixir, time to go home!", $COLOR_FUCHSIA)
@@ -124,7 +128,9 @@ Func smartZap($minDE = -1)
 	EndIf
 
 	; Get the number of lightning spells
-	$numSpells = $CurLightningSpell
+	$numSpells = unitCount($eLSpell)
+	; ChackBR Temp Fix
+	IF ( $numSpells < $CurLightningSpell ) Then $numSpells = $CurLightningSpell
 	If $numSpells = 0 Then
 		SetLog("No lightning spells trained, time to go home!", $COLOR_FUCHSIA)
 		Return $performedZap
@@ -171,12 +177,12 @@ Func smartZap($minDE = -1)
 		$oldSearchDark = $searchDark
 
 		; Get the drop point for the lignting spell if it will be used
-		;$dropPoint = convertToPoint($aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
+		; $dropPoint = convertToPoint($aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 		; If you have max lightning spells, drop lightning on any level DE drill
 		If $numSpells > (4 - $spellAdjust) Then
 			SetLog("First condition: " & 4 - $spellAdjust & "+ Spells so attack any drill.", $COLOR_FUCHSIA)
-			;zapDrill($dropPoint)
+			; zapDrill($dropPoint)
 			CastZapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
@@ -186,7 +192,7 @@ Func smartZap($minDE = -1)
 		; If you have one less then max, drop it on drills level (3 - drill offset)
 		ElseIf $numSpells > (3 - $spellAdjust) And $aDarkDrills[0][2] > (3 - $drillLvlOffset) Then
 			SetLog("Second condition: Attack Lvl " & 3 - $drillLvlOffset & "+ drills if you have " & 3 - $spellAdjust & "+ spells", $COLOR_FUCHSIA)
-			;zapDrill($dropPoint)
+			; zapDrill($dropPoint)
 			CastZapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
@@ -196,7 +202,7 @@ Func smartZap($minDE = -1)
 		; If the collector is higher than lvl (4 - drill offset) and collector is estimated more than 30% full
 		ElseIf $aDarkDrills[0][2] > (4 - $drillLvlOffset) And ($aDarkDrills[0][3] / $DrillLevelHold[$aDarkDrills[0][2] - 1]) > 0.3 Then
 			SetLog("Third condition: Attack Lvl " & 4 - $drillLvlOffset & "+ drills with more then 30% estimated DE if you have less than " & 4 - $spellAdjust & " spells", $COLOR_FUCHSIA)
-			;zapDrill($dropPoint)
+			; zapDrill($dropPoint)
 			CastZapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True

@@ -166,5 +166,5 @@ Local $x = 20, $y = 25
 			GUICtrlSetTip(-1, "Random Stay in the Game and Close the Game with your previous settings!")
 			;GUICtrlSetState(-1, $GUI_DISABLE)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-	
+
 ;GUISetState()

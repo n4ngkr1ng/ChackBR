@@ -133,8 +133,13 @@ Func isTimeInRange($startTime, $endTime)
 EndFunc   ;==>isTimeInRange
 
 Func checkRemainingTraining()
+
 	If $ichkCloseTraining = 0 Then Return
-	If $ArmyCapacity > 70 Then Return
+
+	If $ArmyCapacity > 80 Then
+		Setlog( "Skip CCWT, Troops is Over " & $ArmyCapacity & "% Done", $COLOR_BLUE)
+		Return
+	EndIf
 
 	; Get the time remaining in minutes
 	If $iTotalCountSpell = 0 Then
@@ -145,11 +150,11 @@ Func checkRemainingTraining()
 
 	; Check if the Remaining time is less than 5 minutes
 	If $iRemainingTimeTroops < 6 Then 
-		Setlog( "Skip CCWT, Train Time < 5 Minutes: " & $iRemainingTimeTroops, $COLOR_BLUE)
+		Setlog( "Skip CCWT, Time < 5 Min [ Calculated: " & $iRemainingTimeTroops & " Min ]", $COLOR_BLUE)
 		Return
 	Else
 		If $iRemainingTimeTroops > 15 Then
-			Setlog( "Calculated Train Time (Shrink to 15): " & $iRemainingTimeTroops & " Minutes", $COLOR_BLUE)
+			Setlog( "Calculated CCWT Time: " & $iRemainingTimeTroops & " Min [Adjusted to 15~20 Min]", $COLOR_BLUE)
 			$iRemainingTimeTroops = 15
 		Endif
 	Endif

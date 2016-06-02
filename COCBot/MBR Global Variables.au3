@@ -1465,9 +1465,9 @@ Global $iChkDontRemove, $chkDontRemove
 Global $ichkCloseTraining = 1
 Global $minTrainAddition = 1
 Global $maxTrainAddition = 5
-Global $LeaveCoCOpen = 1
-Global $CloseCoCGame = 0
-Global $RandomCoCOpen = 1
+Global $LeaveCoCOpen = 0
+Global $CloseCoCGame = 1
+Global $RandomCoCOpen = 0
 Global $RandomCloseTraining = 0
 Global $RandomCloseTraining2 = 0
 
