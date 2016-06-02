@@ -333,7 +333,7 @@ Func DonateCC($Check = False)
 		EndIf
 
 		ForceCaptureRegion()
-		;$Scroll = _PixelSearch(288, 640 + $bottomOffsetY, 290, 655 + $bottomOffsetY, Hex(0x588800, 6), 20)
+
 		$y = 90
 		$Scroll = _PixelSearch(293, 8 + $y, 295, 23 + $y, Hex(0xFFFFFF, 6), 20)
 		If IsArray($Scroll) Then
@@ -610,8 +610,7 @@ Func DonateWindow($Open = True)
 ;		Click($DonatePixel[0] + 50, $DonatePixel[1] + 10, 1, 0, "#0174")
 
 	If _ColorCheck(_GetPixelColor($DonatePixel[0], $DonatePixel[1], True), Hex(0xFFFFFF, 6), 5) Then
-		; Click($DonatePixel[0] - 12, $DonatePixel[1] + 10, 1, 0, "#0174")
-		Click($DonatePixel[0] - 12, $DonatePixel[1] +  0, 1, 0, "#0174") 
+		Click($DonatePixel[0] - 12, $DonatePixel[1] + 10, 1, 0, "#0174")
 	Else
 		If $debugSetlog = 1 Then SetLog("Could not find the Donate Button!", $COLOR_PURPLE)
 		Return False
