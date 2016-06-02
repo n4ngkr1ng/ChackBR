@@ -53,7 +53,7 @@ $sModversion = "Chk_1000" ; MyBot.run v6.1.0
 $sModversion = "Chk_1100" ; MyBot.run v6.1.1
 $sModversion = "Chk_1101" ; Fix for Donations
 $sModversion = "Chk_1102" ; Add Close While Training
-$sModversion = "Chk_1103" ; Start SmartZap Fix
+$sModversion = "Chk_1103" ; Add SmartZap
 $sBotVersion = "v6.1.1" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
 $sBotTitle = "My Bot " & $sBotVersion & " " & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 

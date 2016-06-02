@@ -142,8 +142,16 @@ Func checkRemainingTraining()
 		Local $iRemainingTimeTroops = RemainTrainTime(True, True)
 	EndIf
 
-	; Check if the Remaining time is less then 2 minutes
-	If $iRemainingTimeTroops <= 2 Then Return
+	; Check if the Remaining time is less than 5 minutes
+	If $iRemainingTimeTroops < 6 Then 
+		Setlog( "Skip CCWT, Train Time < 5 Minutes: " & $iRemainingTimeTroops )
+		Return
+	Else
+		If $iRemainingTimeTroops > 15 Then
+			Setlog( "Calculated Train Time (Shrink to 15): " & $iRemainingTimeTroops & " Minutes" )
+			$iRemainingTimeTroops = 15
+		Endif
+	Endif
 
 	; Add random additional time from $minTrainAddition minute to $maxTrainAddition minutes
 	$iRemainingTimeTroops += Random($minTrainAddition, $maxTrainAddition, 1)

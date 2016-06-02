@@ -1463,7 +1463,8 @@ Global $iChkDontRemove, $chkDontRemove
 
 ; Close while training variables
 Global $ichkCloseTraining = 1
-Global $minTrainAddition = 10, $maxTrainAddition = 20
+Global $minTrainAddition = 1
+Global $maxTrainAddition = 5
 Global $LeaveCoCOpen = 0
 Global $CloseCoCGame = 1
 Global $RandomCoCOpen = 0
