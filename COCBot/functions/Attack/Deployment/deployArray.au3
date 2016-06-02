@@ -138,8 +138,8 @@ EndFunc   ;==>deployStringToArray
 
 Func deployUISettingsToArray($nbSides = 1)
 	Local $result[$DEPLOY_MAX_WAVES][$DEPLOY_COLUMNS]
-	Local $waveCount[$eHaSpell + 1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	Local $waveNumber[$eHaSpell + 1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	Local $waveCount[$eHaSpell + 1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	Local $waveNumber[$eHaSpell + 1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	Local $kind = $eDeployUnused, $position = 0
 
 	If isDeployEmpty() Then
