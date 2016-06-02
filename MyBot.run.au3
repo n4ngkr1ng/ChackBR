@@ -56,6 +56,7 @@ $sModversion = "Chk_1102" ; Add Close While Training
 $sModversion = "Chk_1103" ; Start SmartZap Fix
 $sModversion = "Chk_1104" ; SmartZap ok
 $sModversion = "Chk_1105" ; Fix for CCWT
+$sModversion = "Chk_1106" ; CCWT will exec only if Train Troops < 80%
 $sBotVersion = "v6.1.1" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
 $sBotTitle = "My Bot " & $sBotVersion & " " & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 

@@ -610,7 +610,8 @@ Func DonateWindow($Open = True)
 ;		Click($DonatePixel[0] + 50, $DonatePixel[1] + 10, 1, 0, "#0174")
 
 	If _ColorCheck(_GetPixelColor($DonatePixel[0], $DonatePixel[1], True), Hex(0xFFFFFF, 6), 5) Then
-		Click($DonatePixel[0] - 12, $DonatePixel[1] + 10, 1, 0, "#0174")
+		; Click($DonatePixel[0] - 12, $DonatePixel[1] + 10, 1, 0, "#0174")
+		Click($DonatePixel[0] - 12, $DonatePixel[1] +  0, 1, 0, "#0174") 
 	Else
 		If $debugSetlog = 1 Then SetLog("Could not find the Donate Button!", $COLOR_PURPLE)
 		Return False
@@ -801,7 +802,7 @@ Func DetectSlotTroop($Type)
 	If $Type >= $eBarb And $Type <= $eLava Then
 		For $Slot = 0 To 5
 			If $debugSetlog = 1 Then Setlog(" Slot : " & $Slot, $COLOR_PURPLE)
-			Local $FullTemp = getOcrDonationTroopsDetection(343 + (68 * $Slot), $DonationWindowY + 37)
+			Local $FullTemp = getOcrDonationTroopsDetection(358 + (68 * $Slot), $DonationWindowY + 38)
 			If $debugSetlog = 1 Then Setlog(" getOcrDonationTroopsDetection: " & $FullTemp, $COLOR_PURPLE)
 			If $debugSetlog = 1 Then
 				Switch $FullTemp
@@ -909,7 +910,7 @@ Func DetectSlotTroop($Type)
 		Next
 		For $Slot = 6 To 11
 			If $debugSetlog = 1 Then Setlog(" Slot : " & $Slot, $COLOR_PURPLE)
-			Local $FullTemp = getOcrDonationTroopsDetection(343 + (68 * ($Slot - 6)), $DonationWindowY + 124)
+			Local $FullTemp = getOcrDonationTroopsDetection(358 + (68 * ($Slot - 7)), $DonationWindowY + 127)
 			If $debugSetlog = 1 Then Setlog(" getOcrDonationTroopsDetection: " & $FullTemp, $COLOR_PURPLE)
 			If $debugSetlog = 1 Then
 				Switch $FullTemp
