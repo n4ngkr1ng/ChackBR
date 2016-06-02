@@ -22,7 +22,7 @@ $hGUI_Profiles = GUICreate("", $_GUI_MAIN_WIDTH - 28, $_GUI_MAIN_HEIGHT - 255 - 
 GUISwitch($hGUI_Profiles)
 
 Local $x = 20, $y = 25
-	$grpProfiles = GUICtrlCreateGroup(GetTranslated(637,1, "Switch Profiles"), $x - 20, $y - 20, 440, 160)
+	$grpProfiles = GUICtrlCreateGroup(GetTranslated(637,1, "Switch Profiles"), $x - 20, $y - 20, 440, 85)
 		;$y -= 5
 		$x -= 5
 		;$lblProfile = GUICtrlCreateLabel(GetTranslated(7,27, "Current Profile") & ":", $x, $y, -1, -1)
@@ -114,15 +114,57 @@ Local $x = 20, $y = 25
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	; Close When Training Settings
-Local $x = 20, $y = 195
-	$grpTrainingClose = GUICtrlCreateGroup("Training Settings", $x - 20, $y - 20, 440, 190)
+	Local $x = 20, $y = 110
+	$grpTrainingClose = GUICtrlCreateGroup("Training Settings", $x - 20, $y - 20, 440, 275)
 		$x -= 5
-		GUICtrlCreateIcon ($pIconLib, $eIcnSleepMode, $x - 10, $y + 10, 48, 48)
+		GUICtrlCreateIcon ($pIconLib, $eIcnSleepMode, $x - 0, $y + 40, 48, 48)
 		$chkUseTrainingClose = GUICtrlCreateCheckbox("Enable Close While Training", $x + 50, $y - 5, -1, -1)
-			$txtTip = "Enable this option to cause the bot to close when there is more than 2 mins remaining on training times." & @CRLF & @CRLF & _
+			$txtTip = "Enable this option to cause the bot to close when there is more than 5 mins remaining on training times." & @CRLF & @CRLF & _
 				      "     Doctor's Recommendation: Use this setting to reduce overall time spent online."
 			GUICtrlSetTip(-1, $txtTip)
 			GUICtrlSetOnEvent(-1, "chkUseTrainingClose")
+		$lblExtraTimeMin = GUICtrlCreateLabel("Extra Time Min: ", $x + 67, $y + 24, 90, -1, $SS_RIGHT)
+		$lblExtraTimeMinNumber = GUICtrlCreateLabel("10", $x + 165, $y + 24, 15, 15, $SS_RIGHT)
+		$lblExtraTimeMinUnit = GUICtrlCreateLabel("minutes", $x + 185, $y + 24, -1, -1)
+		$sldExtraTimeMin = GUICtrlCreateSlider($x + 235, $y + 22, 150, 25, BITOR($TBS_TOOLTIPS, $TBS_AUTOTICKS)) ;,
+			$txtTip = "Select the minimum number of mins to add extra to the log out time for training." & @CRLF & _
+				      "     Value can be from 0 to 30 mins."
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetBkColor(-1, $COLOR_WHITE)
+			_GUICtrlSlider_SetTipSide(-1, $TBTS_BOTTOM)
+			_GUICtrlSlider_SetTicFreq(-1, 1)
+			GUICtrlSetLimit(-1, 30)
+			GUICtrlSetData(-1, 10)
+			GUICtrlSetOnEvent(-1, "sldExtraTimeMin")
+		$lblExtraTimeMax = GUICtrlCreateLabel("Extra Time Max: ", $x + 70, $y + 50, 90, -1, $SS_RIGHT)
+		$lblExtraTimeMaxNumber = GUICtrlCreateLabel("20", $x + 165, $y + 50, 15, 15, $SS_RIGHT)
+		$lblExtraTimeMaxUnit = GUICtrlCreateLabel("minutes", $x + 185, $y + 50, -1, -1)
+		$sldExtraTimeMax = GUICtrlCreateSlider($x + 235, $y + 47, 150, 25, BITOR($TBS_TOOLTIPS, $TBS_AUTOTICKS)) ;,
+			$txtTip = "Select the maximum number of mins to add extra to the log out time for training." & @CRLF & _
+				      "     Value can be from 0 to 30 mins."
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetBkColor(-1, $COLOR_WHITE)
+			_GUICtrlSlider_SetTipSide(-1, $TBTS_BOTTOM)
+			_GUICtrlSlider_SetTicFreq(-1, 1)
+			GUICtrlSetLimit(-1, 30)
+			GUICtrlSetData(-1, 20)
+			GUICtrlSetOnEvent(-1, "sldExtraTimeMax")
+		$radLeaveCoCOpen = GUICtrlCreateRadio("Leave CoC open and disconnect by inactivity", $x + 81, $y + 70, -1, -1)
+			GUICtrlSetTip(-1, "While training the bot will leave CoC open and disconnect by inactivity.")
+			;GUICtrlSetOnEvent(-1, "chkLeaveOpenOrClose")
+			;GUICtrlSetState(-1, $GUI_DISABLE)
+		$radCloseCoCGame = GUICtrlCreateRadio("Close CoC game and stay on home screen", $x + 81, $y + 90, -1, -1)
+			GUICtrlSetTip(-1, "While training the bot will close CoC game and stay on android home screen.")
+			;GUICtrlSetOnEvent(-1, "chkLeaveOpenOrClose")
+			;GUICtrlSetState(-1, $GUI_DISABLE)
+		$radRandomCoCOpen = GUICtrlCreateRadio("Random Close or Leave! ", $x + 81, $y + 110, -1, -1)
+			GUICtrlSetState(-1, $GUI_CHECKED)
+			GUICtrlSetTip(-1, "Random between leave coc open or Close the game.")
+			;GUICtrlSetOnEvent(-1, "chkLeaveOpenOrClose")
+			;GUICtrlSetState(-1, $GUI_DISABLE)
+		$chkRandomStayORClose = GUICtrlCreateCheckbox("Random Stay or Close the Game while Training", $x + 50, $y + 127, -1, -1)
+			GUICtrlSetTip(-1, "Random Stay in the Game and Close the Game with your previous settings!")
+			;GUICtrlSetState(-1, $GUI_DISABLE)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
+	
 ;GUISetState()

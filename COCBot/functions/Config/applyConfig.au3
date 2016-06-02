@@ -2403,6 +2403,35 @@ _GUICtrlComboBox_SetCurSel($cmbTHSnipeBeforeLBScript, _GUICtrlComboBox_FindStrin
 	Else
 		GUICtrlSetState($chkUseTrainingClose, $GUI_UNCHECKED)
 	EndIf
+	chkUseTrainingClose()
+	GUICtrlSetData($sldExtraTimeMin, $minTrainAddition)
+	GUICtrlSetData($sldExtraTimeMax, $maxTrainAddition)
+	sldExtraTimeMin()
+	sldExtraTimeMax()
+
+	If $LeaveCoCOpen = 1 Then
+		GUICtrlSetState($radLeaveCoCOpen, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($radLeaveCoCOpen, $GUI_UNCHECKED)
+	EndIf
+
+	If $CloseCoCGame = 1 Then
+		GUICtrlSetState($radCloseCoCGame, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($radCloseCoCGame, $GUI_UNCHECKED)
+	EndIf
+
+	If $RandomCoCOpen = 1 Then
+		GUICtrlSetState($radRandomCoCOpen, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($radRandomCoCOpen, $GUI_UNCHECKED)
+	EndIf
+
+	If $RandomCloseTraining = 1 Then
+		GUICtrlSetState($chkRandomStayORClose, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkRandomStayORClose, $GUI_UNCHECKED)
+	EndIf
 
 	; Reenabling window redraw
 	If $bRedrawAtExit Then SetRedrawBotWindow(True)
