@@ -16,45 +16,81 @@
 Func getDeploymentFileTroopName($kind)
     ; Troop string as an array
 	; This order must exactly match the troops enum from MBR Global Variables.au3
-	Local $result[$eDeployUnused + 1] = ["$eBarb", _
-										 "$eArch", _
-										 "$eGiant", _
-										 "$eGobl", _
-										 "$eWall", _
-										 "$eBall", _
-										 "$eWiza", _
-										 "$eHeal", _
-										 "$eDrag", _
-										 "$ePekk", _
-										 "$eMini", _
-										 "$eHogs", _
-										 "$eValk", _
-										 "$eGole", _
-										 "$eWitc", _
-										 "$eLava", _
-										 "$eBowl", _
-										 "$eKing", _
-										 "$eQueen", _
-										 "$eWarden", _
-										 "$eCastle", _
-										 "$eLSpell", _
-										 "$eHSpell", _
-										 "$eRSpell", _
-										 "$eJSpell", _
-										 "$eFSpell", _
-										 "$ePSpell", _
-										 "$eESpell", _
-										 "$eHaSpell", _
-										 "$eDeployWait", _
-										 "$eDeployUnused"]
+	Local $result[$eDeployUnused + 1] = [	"$eBarb", _
+						"$eArch", _
+						"$eGiant", _
+						"$eGobl", _
+						"$eWall", _
+						"$eBall", _
+						"$eWiza", _
+						"$eHeal", _
+						"$eDrag", _
+						"$ePekk", _
+						"$eMini", _
+						"$eHogs", _
+						"$eValk", _
+						"$eGole", _
+						"$eWitc", _
+						"$eLava", _
+						"$eBowl", _
+						"$eKing", _
+						"$eQueen", _
+						"$eWarden", _
+						"$eCastle", _
+						"$eLSpell", _
+						"$eHSpell", _
+						"$eRSpell", _
+						"$eJSpell", _
+						"$eFSpell", _
+						"$ePSpell", _
+						"$eESpell", _
+						"$eHaSpell", _
+						"$eDeployWait", _
+						"$eDeployUnused"]
 
 	Return $result[$kind]
 EndFunc   ;==>getDeploymentFileTroopName
 
 Func getTranslatedTroopName($kind)
-    ;Troop string as an array
+	;Troop string as an array
 	;This order must exactly match the troops enum from MBR Global Variables.au3
-    Local $result[$eHaSpell + 1] = [	GetTranslated(604,  1, "Barbarians"), _
+	Local $result[$eHaSpell + 1] = [("Barbarians"), _
+					("Archers"), _
+					("Giants"), _
+					("Goblins"), _
+					("Wall Breakers"), _
+					("Balloons"), _
+					("Wizards"), _
+					("Healers"), _
+					("Dragons"), _
+					("Pekkas"), _
+					("Minions"), _
+					("Hog Riders"), _
+					("Valkyries"), _
+					("Golems"), _
+					("Witches"), _
+					("Lava Hounds"), _
+					("Bowlers"), _
+					("King"), _
+					("Queen"), _
+					("Grand Warden"), _
+					("Clan Castle"), _
+					("Lightning Spell"), _
+					("Healing Spell"), _
+					("Rage Spell"), _
+					("Jump Spell"), _
+					("Freeze Spell"), _
+					("Poison Spell"), _
+					("Earthquake Spell"), _
+					("Haste Spell")]
+
+	Return $result[$kind]
+EndFunc   ;==>getTranslatedTroopName
+
+Func getTranslatedTroopName_Bkp($kind)
+	;Troop string as an array
+	;This order must exactly match the troops enum from MBR Global Variables.au3
+	Local $result[$eHaSpell + 1] = [GetTranslated(604,  1, "Barbarians"), _
 					GetTranslated(604,  2, "Archers"), _
 					GetTranslated(604,  3, "Giants"), _
 					GetTranslated(604,  4, "Goblins"), _
@@ -85,7 +121,7 @@ Func getTranslatedTroopName($kind)
 					GetTranslated(605,  8, "Haste Spell")]
 
 	Return $result[$kind]
-EndFunc   ;==>getTranslatedTroopName
+EndFunc   ;==>getTranslatedTroopName_Bkp
 
 Func getTroopNumber($TroopEnumString)
 	Local $result
