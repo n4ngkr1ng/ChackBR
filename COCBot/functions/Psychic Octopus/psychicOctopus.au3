@@ -136,7 +136,8 @@ Func checkRemainingTraining()
 	If $ichkCloseTraining = 0 Then Return
 
 	; Get the time remaining in minutes
-	If $iTotalCountSpell = 0 Then
+	; If $iTotalCountSpell = 0 Then
+	If $iTotalCountSpell < 99 Then ; Force to Not "read" the Spells
 		Local $iRemainingTimeTroops = RemainTrainTime(True, False) ; Not necessary "read" the Spells
 	Else
 		Local $iRemainingTimeTroops = RemainTrainTime(True, True)
