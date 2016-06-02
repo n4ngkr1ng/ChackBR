@@ -801,7 +801,7 @@ Func DetectSlotTroop($Type)
 	If $Type >= $eBarb And $Type <= $eLava Then
 		For $Slot = 0 To 5
 			If $debugSetlog = 1 Then Setlog(" Slot : " & $Slot, $COLOR_PURPLE)
-			Local $FullTemp = getOcrDonationTroopsDetection(358 + (68 * $Slot), $DonationWindowY + 38)
+			Local $FullTemp = getOcrDonationTroopsDetection(343 + (68 * $Slot), $DonationWindowY + 37)
 			If $debugSetlog = 1 Then Setlog(" getOcrDonationTroopsDetection: " & $FullTemp, $COLOR_PURPLE)
 			If $debugSetlog = 1 Then
 				Switch $FullTemp
@@ -909,7 +909,7 @@ Func DetectSlotTroop($Type)
 		Next
 		For $Slot = 6 To 11
 			If $debugSetlog = 1 Then Setlog(" Slot : " & $Slot, $COLOR_PURPLE)
-			Local $FullTemp = getOcrDonationTroopsDetection(358 + (68 * ($Slot - 7)), $DonationWindowY + 127)
+			Local $FullTemp = getOcrDonationTroopsDetection(343 + (68 * ($Slot - 6)), $DonationWindowY + 124)
 			If $debugSetlog = 1 Then Setlog(" getOcrDonationTroopsDetection: " & $FullTemp, $COLOR_PURPLE)
 			If $debugSetlog = 1 Then
 				Switch $FullTemp

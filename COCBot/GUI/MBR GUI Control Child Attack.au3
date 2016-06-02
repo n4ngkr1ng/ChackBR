@@ -89,7 +89,7 @@ Func cmbDBAlgorithm()
 EndFunc
 
 Func cmbABAlgorithm()
-	Local $iCmbValue =  _GUICtrlComboBox_GetCurSel($cmbABAlgorithm)
+	Local $iCmbValue = _GUICtrlComboBox_GetCurSel($cmbABAlgorithm)
 	If $iCmbValue = 1 Then
 		_GUI_Value_STATE("SHOW", $groupAttackABSpell&"#"&$groupIMGAttackABSpell)
 	Else
