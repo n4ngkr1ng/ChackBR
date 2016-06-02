@@ -177,7 +177,7 @@ Func smartZap($minDE = -1)
 		If $numSpells > (4 - $spellAdjust) Then
 			SetLog("First condition: " & 4 - $spellAdjust & "+ Spells so attack any drill.", $COLOR_FUCHSIA)
 			;zapDrill($dropPoint)
-			CastSpell($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
+			CastZapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
 			$skippedZap = False
@@ -187,7 +187,7 @@ Func smartZap($minDE = -1)
 		ElseIf $numSpells > (3 - $spellAdjust) And $aDarkDrills[0][2] > (3 - $drillLvlOffset) Then
 			SetLog("Second condition: Attack Lvl " & 3 - $drillLvlOffset & "+ drills if you have " & 3 - $spellAdjust & "+ spells", $COLOR_FUCHSIA)
 			;zapDrill($dropPoint)
-			CastSpell($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
+			CastZapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
 			$skippedZap = False
@@ -197,7 +197,7 @@ Func smartZap($minDE = -1)
 		ElseIf $aDarkDrills[0][2] > (4 - $drillLvlOffset) And ($aDarkDrills[0][3] / $DrillLevelHold[$aDarkDrills[0][2] - 1]) > 0.3 Then
 			SetLog("Third condition: Attack Lvl " & 4 - $drillLvlOffset & "+ drills with more then 30% estimated DE if you have less than " & 4 - $spellAdjust & " spells", $COLOR_FUCHSIA)
 			;zapDrill($dropPoint)
-			CastSpell($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
+			CastZapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
 			$skippedZap = False
@@ -296,3 +296,26 @@ Func smartZap($minDE = -1)
 
 	Return $performedZap
 EndFunc   ;==>smartZap
+
+Func CastZapDrill($ZapSpell, $x, $y)
+
+	Local $Spell = -1
+	Local $name = ""
+
+	For $i = 0 To UBound($atkTroops) - 1
+		If $atkTroops[$i][0] = $ZapSpell Then
+			$Spell = $i
+			$name = NameOfTroop($ZapSpell, 0)
+		EndIf
+	Next
+
+	;If ($Spell = -1) Then Return False
+	If $Spell > -1 Then
+		SetLog("Dropping " & $name)
+		SelectDropTroop($Spell)
+		If IsAttackPage() Then Click($x, $y, 1, 0, "#0029")
+	Else
+		If $debugSetlog = 1 Then SetLog("No " & $name & " Found")
+	EndIf
+
+EndFunc   ;==>CastZapDrill
