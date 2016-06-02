@@ -125,9 +125,9 @@ Func smartZap($minDE = -1)
 	EndIf
 
 	; Get the number of lightning spells
-	; $numSpells = unitCount($eLSpell)
+	$numSpells = unitCount($eLSpell)
 	; ChackBR Temp Fix
-	$numSpells = $CurLightningSpell
+	If $numSpells < $CurLightningSpell Then $numSpells = $CurLightningSpell
 	If $numSpells = 0 Then
 		SetLog("No lightning spells trained, time to go home!", $COLOR_FUCHSIA)
 		Return $performedZap

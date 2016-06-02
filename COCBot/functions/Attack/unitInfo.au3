@@ -54,35 +54,35 @@ EndFunc   ;==>getDeploymentFileTroopName
 Func getTranslatedTroopName($kind)
 	;Troop string as an array
 	;This order must exactly match the troops enum from MBR Global Variables.au3
-	Local $result[$eHaSpell + 1] = [("Barbarians"), _
-					("Archers"), _
-					("Giants"), _
-					("Goblins"), _
-					("Wall Breakers"), _
-					("Balloons"), _
-					("Wizards"), _
-					("Healers"), _
-					("Dragons"), _
-					("Pekkas"), _
-					("Minions"), _
-					("Hog Riders"), _
-					("Valkyries"), _
-					("Golems"), _
-					("Witches"), _
-					("Lava Hounds"), _
-					("Bowlers"), _
-					("King"), _
-					("Queen"), _
-					("Grand Warden"), _
-					("Clan Castle"), _
-					("Lightning Spell"), _
-					("Healing Spell"), _
-					("Rage Spell"), _
-					("Jump Spell"), _
-					("Freeze Spell"), _
-					("Poison Spell"), _
-					("Earthquake Spell"), _
-					("Haste Spell")]
+	Local $result[$eHaSpell + 1] = ["Barbarians", _
+					"Archers", _
+					"Giants", _
+					"Goblins", _
+					"Wall Breakers", _
+					"Balloons", _
+					"Wizards", _
+					"Healers", _
+					"Dragons", _
+					"Pekkas", _
+					"Minions", _
+					"Hog Riders", _
+					"Valkyries", _
+					"Golems", _
+					"Witches", _
+					"Lava Hounds", _
+					"Bowlers", _
+					"King", _
+					"Queen", _
+					"Grand Warden", _
+					"Clan Castle", _
+					"Lightning Spell", _
+					"Healing Spell", _
+					"Rage Spell", _
+					"Jump Spell", _
+					"Freeze Spell", _
+					"Poison Spell", _
+					"Earthquake Spell", _
+					"Haste Spell"]
 
 	Return $result[$kind]
 EndFunc   ;==>getTranslatedTroopName
@@ -155,7 +155,7 @@ Func unitLocation($kind) ; Gets the location of the unit type on the bar.
 EndFunc   ;==>unitLocation
 
 Func getUnitLocationArray() ; Gets the location on the bar for every type of unit.
-	Local $result[$eCCSpell + 1] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+	Local $result[$eCCSpell + 1] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 	; Loop through all the bar and assign it position to the respective unit.
 	For $i = 0 To UBound($atkTroops) - 1
@@ -204,7 +204,7 @@ Func unitCount($kind) ; Gets a count of the number of units of the type specifie
 EndFunc   ;==>unitCount
 
 Func unitCountArray() ; Gets a count of the number of units for every type of unit.
-	Local $result[$eCCSpell + 1] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+	Local $result[$eCCSpell + 1] = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 	; Loop through all the bar and assign its unit count to the respective unit.
 	For $i = 0 To UBound($atkTroops) - 1
