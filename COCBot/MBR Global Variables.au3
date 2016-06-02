@@ -1509,3 +1509,8 @@ Global Const $drillLevelSteal[6] = [59, _
 								    251, _
 								    343, _
 								    479]
+
+Global Const $eDeployWait = $eHaSpell + 1
+Global Const $eDeployUnused = $eHaSpell + 2
+Global Const $DEPLOY_WAIT_STRING = "<Delay>"
+Global Const $DEPLOY_EMPTY_STRING = "<Unused>"
