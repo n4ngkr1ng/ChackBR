@@ -27,8 +27,12 @@
 #pragma compile(Out, MyBot.run.exe)  ; Required
 
 ;~ Boost launch time by increasing process priority (will be restored again when finished launching)
-Local $iBotProcessPriority = _ProcessGetPriority(@AutoItPID)
-ProcessSetPriority(@AutoItPID, $PROCESS_ABOVENORMAL)
+Local $iBotProcessPriority
+If $CmdLine[0] < 2 Then
+	$iBotProcessPriority = _ProcessGetPriority(@AutoItPID)
+	ProcessSetPriority(@AutoItPID, $PROCESS_ABOVENORMAL)
+Endif
+
 
 Global $iBotLaunchTime = 0
 Local $hBotLaunchTime = TimerInit()
@@ -48,18 +52,24 @@ EndIf
 #include "COCBot\functions\Config\ScreenCoordinates.au3"
 
 Local $sModversion
-$sModversion = "Chk_0000" ; MyBot.run v6.0.0
-$sModversion = "Chk_1000" ; MyBot.run v6.1.0
-$sModversion = "Chk_1100" ; MyBot.run v6.1.1
-$sModversion = "Chk_1101" ; Fix for Donations
-$sModversion = "Chk_1102" ; Add Close While Training
-$sModversion = "Chk_1103" ; Start SmartZap Fix
-$sModversion = "Chk_1104" ; SmartZap ok
-$sModversion = "Chk_1105" ; Fix for CCWT
-$sModversion = "Chk_1106" ; CCWT will exec only if Train Troops < 80%
-$sModversion = "Chk_1107" ; Revert Fix for Donations ( Chk_1101 )
-$sBotVersion = "v6.1.1" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
-$sBotTitle = "My Bot " & $sBotVersion & " " & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
+; "0000" ; MyBot.run v6.0.0
+; "1000" ; MyBot.run v6.1.0
+; "1100" ; MyBot.run v6.1.1
+; "1101" ; Fix for Donations
+; "1102" ; Add Close While Training
+; "1103" ; Start SmartZap Fix
+; "1104" ; SmartZap ok
+; "1105" ; Fix for CCWT
+; "1106" ; CCWT will exec only if Train Troops < 80%
+; "1107" ; Revert Fix for Donations ( Chk_1101 )
+; "1200" ; MyBot.run v6.1.2
+; "1201" ; SmartZap, FastClicks, CCWT, DEB
+; "1202" ; CCWT user set max sleep time
+; "1203" ; CCWT try request troops before
+; "1204" ; Allow BOT cpu priority only for single process
+$sModversion = "1205" ; Updates for CSV Attack Files ( Force All Troops Deploy )
+$sBotVersion = "v6.1.2" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
+$sBotTitle = "My Bot " & $sBotVersion & ".1.s" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 
 Opt("WinTitleMatchMode", 3) ; Window Title exact match mode
 #include "COCBot\functions\Android\Android.au3"
@@ -109,6 +119,7 @@ $hMutex_MyBot = _Singleton("MyBot.run", 1)
 $OnlyInstance = $hMutex_MyBot <> 0 ; And False
 SetDebugLog("My Bot is " & ($OnlyInstance ? "" : "not ") & "the only running instance")
 
+#include "COCBot\MBR Global Variables Troops.au3"
 #include "COCBot\MBR GUI Design.au3"
 #include "COCBot\MBR GUI Control.au3"
 #include "COCBot\MBR Functions.au3"
@@ -172,7 +183,9 @@ $iBotLaunchTime = TimerDiff($hBotLaunchTime)
 SetDebugLog("MyBot.run launch time " & Round($iBotLaunchTime) & " ms.")
 
 ;~ Restore process priority
-ProcessSetPriority(@AutoItPID, $iBotProcessPriority)
+If $aCmdLine[0] < 2 Then
+	ProcessSetPriority(@AutoItPID, $iBotProcessPriority)
+EndIF
 
 ;AutoStart Bot if request
 AutoStart()
@@ -193,10 +206,24 @@ BotClose()
 Func runBot() ;Bot that runs everything in order
 	$TotalTrainedTroops = 0
 	Local $Quickattack = False
+	Local $LeaveOrClose = 0
 	While 1
 		$Restart = False
 		$fullArmy = False
 		$CommandStop = -1
+			
+		; each loop ( after each attack ) will determinate if close while train or not 
+		If $RandomCloseTraining = 1 then 
+			if $debugSetlog = 1 then Setlog("You chose the Random Close Or Leave train...", $COLOR_RED)
+			$RandomCloseTraining2 = Random(0,1,1)
+			If $RandomCloseTraining2 = 1 then $LeaveOrClose +=1 
+			If $LeaveOrClose = 3 then 
+				$RandomCloseTraining2 = 0
+				$LeaveOrClose = 0 
+			EndIf 
+			if $debugSetlog = 1 then Setlog("$RandomCloseTraining2: " & $RandomCloseTraining2)
+		EndIf
+			
 		If _Sleep($iDelayRunBot1) Then Return
 		checkMainScreen()
 		If $Restart = True Then ContinueLoop
@@ -407,6 +434,7 @@ Func Idle() ;Sequence that runs until Full Army
 			Train()
 				; Close While Training
 				checkRemainingTraining()
+				; Close While Training - end
 				If $Restart = True Then ExitLoop
 				If _Sleep($iDelayIdle1) Then ExitLoop
 				checkMainScreen(False)
@@ -481,6 +509,8 @@ Func AttackMain() ;Main control for attack functions
 			Attack()
 				If $Restart = True Then Return
 			ReturnHome($TakeLootSnapShot)
+			; Increase the counter for the number of attacks today
+			$dailyAttacks += 1
 				If _Sleep($iDelayAttackMain2) Then Return
 			Return True
 		Else

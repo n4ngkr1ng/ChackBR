@@ -636,6 +636,7 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 			$debugresourcesoffset = BitOR($debugresourcesoffset, IniRead($config, "debug", "debugresourcesoffset", "0"))
 			$continuesearchelixirdebug = BitOR($continuesearchelixirdebug, IniRead($config, "debug", "continuesearchelixirdebug", "0"))
 			$debugMilkingIMGmake =  BitOR($debugMilkingIMGmake, IniRead($config, "debug", "debugMilkingIMGmake", "0"))
+			$debugOCRdonate = BitOr ($debugOCRdonate,  IniRead($config, "debug", "debugOCRDonate", "0"))
 			;InireadS(xxxx,$config, "attack", "xxxx", "0")
 			;InireadS(xxxx,$config, "attack", "xxxx", "0")
 			;InireadS(xxxx,$config, "attack", "xxxx", "0")
@@ -1012,13 +1013,13 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 		$AndroidAdbClicksTroopDeploySize = Int(IniRead($config, "android", "adb.clicks.troop.deploy.size", $AndroidAdbClicksTroopDeploySize))
 
 		; by AwessomeGamer
-		IniReadS($iChkDontRemove, $config, "troop", "DontRemove", "0")
+		$iChkDontRemove = IniRead($config, "troop", "DontRemove", "0")
 
 		; SmartZap Settings - Added by LunaEclipse
 		$ichkSmartZap = IniRead($config, "SmartZap", "UseSmartZap", "1")
 		$ichkSmartZapDB = IniRead($config, "SmartZap", "ZapDBOnly", "1")
 		$ichkSmartZapSaveHeroes = IniRead($config, "SmartZap", "THSnipeSaveHeroes", "1")
-		$itxtMinDE = IniRead($config, "SmartZap", "MinDE", "250")
+		$itxtMinDE = IniRead($config, "SmartZap", "MinDE", "300")
 
 		; Close When Training Settings
 		$ichkCloseTraining = Number(IniRead($config, "Close When Training", "Enabled", "1"))
@@ -1028,6 +1029,8 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 		$CloseCoCGame = IniRead($config, "Close CoC Game", "Enabled", "1")
 		$RandomCoCOpen = IniRead($config, "Random Leave-Close", "Enabled", "0")
 		$RandomCloseTraining = IniRead($config, "Random Stay-Close Game", "Enabled", "0")
+		$TrainLogoutMaxTime = IniRead($config, "TrainLogout", "TrainLogoutMaxTime", "1")
+		$TrainLogoutMaxTimeTXT = IniRead($config, "TrainLogout", "TrainLogoutMaxTimeTXT", "15")
 	Else
 		Return False
 	EndIf

@@ -114,7 +114,7 @@
 #include "functions\CreateArmy\TrainClick.au3"
 #include "functions\CreateArmy\Train.au3"
 #include "functions\CreateArmy\TrainIt.au3"
-#include "functions\CreateArmy\RemainTimeTrain.au3"
+
 
 #include "functions\Image Search\ImageSearch.au3"
 #include "functions\Image Search\checkDeadBase.au3"
@@ -198,8 +198,6 @@
 #include "functions\Pixels\boolPixelSearch.au3"
 #include "functions\Pixels\isInsideDiamond.au3"
 
-#include "functions\Psychic Octopus\psychicOctopus.au3"
-
 #include "functions\Read Text\BuildingInfo.au3"
 #include "functions\Read Text\getOcr.au3"
 #include "functions\Read Text\getPBTime.au3"
@@ -253,13 +251,8 @@
 #include "functions\Village\ClanLevel.au3"
 #include "functions\Village\StarBonus.au3"
 
-; Attack files - Added by LunaEclipse
-#include "functions\Attack\attackFunctions.au3"
-#include "functions\Attack\unitInfo.au3"
-
-; Deployment files - Added by LunaEclipse
-#include "functions\Attack\Deployment\troopDeployment.au3"
-#include "functions\Attack\Deployment\deployArray.au3"
+; Close while training
+#include "functions\Psychic Octopus\psychicOctopus.au3"
 
 ; SmartZap files - Added by LunaEclipse
 #include "functions\SmartZap\drillSearch.au3"

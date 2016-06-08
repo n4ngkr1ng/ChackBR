@@ -133,34 +133,40 @@ Func isTimeInRange($startTime, $endTime)
 EndFunc   ;==>isTimeInRange
 
 Func checkRemainingTraining()
-
+	Local $AddRandomTIme = Random($minTrainAddition, $maxTrainAddition, 1)
+	Local $iMaxTimeSleep = 0
 	If $ichkCloseTraining = 0 Then Return
-
-	If $ArmyCapacity > 80 Then
+	If $ArmyCapacity > 90 Then
 		Setlog( "Skip CCWT, Troops is Over " & $ArmyCapacity & "% Done", $COLOR_BLUE)
 		Return
 	EndIf
-
 	; Get the time remaining in minutes
 	If $iTotalCountSpell = 0 Then
 		Local $iRemainingTimeTroops = RemainTrainTime(True, False) ; Not necessary "read" the Spells
 	Else
 		Local $iRemainingTimeTroops = RemainTrainTime(True, True)
 	EndIf
-
+	; Request CC troops
+	If $canRequestCC = True Then 
+		Setlog( "CCWT: Try Request troops before sleep", $COLOR_BLUE)
+		RequestCC()
+	EndIf
 	; Check if the Remaining time is less than 5 minutes
-	If $iRemainingTimeTroops < 6 Then 
-		Setlog( "Skip CCWT, Time < 5 Min [ Calculated: " & $iRemainingTimeTroops & " Min ]", $COLOR_BLUE)
+	If $iRemainingTimeTroops < 5 Then 
+		Setlog( "Skip CCWT, Time < 5 Min [ Calculated: " & ( $iRemainingTimeTroops ) & " Min ]", $COLOR_BLUE)
 		Return
 	Else
-		If $iRemainingTimeTroops > 15 Then
-			Setlog( "Calculated CCWT Time: " & $iRemainingTimeTroops & " Min [Adjusted to 15~20 Min]", $COLOR_BLUE)
-			$iRemainingTimeTroops = 15
+		; check for max logout time ( config from user )
+		IF $TrainLogoutMaxTime = 1 Then
+			$iMaxTimeSleep = Number($TrainLogoutMaxTimeTXT)
+			If $iRemainingTimeTroops > $iMaxTimeSleep Then
+				Setlog( "Calculated CCWT Time: " & $iRemainingTimeTroops & " Min [Adjusted " & ( $iMaxTimeSleep + $AddRandomTIme ) & " Min]", $COLOR_BLUE)
+				$iRemainingTimeTroops = $iMaxTimeSleep
+			Endif
 		Endif
 	Endif
-
 	; Add random additional time from $minTrainAddition minute to $maxTrainAddition minutes
-	$iRemainingTimeTroops += Random($minTrainAddition, $maxTrainAddition, 1)
+	$iRemainingTimeTroops += $AddRandomTIme
 	; Convert remaining time to seconds and close COC and wait for that length of time
 	CloseCOCAndWait($iRemainingTimeTroops * 60, True)
 EndFunc   ;==>checkRemainingTraining
@@ -210,3 +216,51 @@ Func checkSleep()
 
 	Return $result
 EndFunc   ;==>checkSleep
+
+Func RemainTrainTime($Troops = True, $Spells = True)
+
+	; Lets open the ArmyOverView Window (this function will check if we are on Main Page and wait for the window open returning True or False)
+	If openArmyOverview() Then
+
+		Local $aRemainTrainTroopTimer = 0
+		Local $aRemainTrainSpellsTimer = 0
+		Local $ResultTroopsHour, $ResultTroopsMinutes
+		Local $ResultSpellsHour, $ResultTroopsMinutes
+
+		Local $ResultTroops = getRemainTrainTimer(688, 176)
+		Local $ResultSpells = getRemainTrainTimer(363, 423)
+
+		If $Troops = True Then
+			If StringInStr($ResultTroops, "h") > 1 Then
+				$ResultTroopsHour = StringSplit($ResultTroops, "h", $STR_NOCOUNT)
+				; $ResultTroopsHour[0] will be the Hour and the $ResultTroopsHour[1] will be the Minutes with the "m" at end
+				$ResultTroopsMinutes = StringTrimRight($ResultTroopsHour[1], 1) ; removing the "m"
+				$aRemainTrainTroopTimer = (Number($ResultTroopsHour[0]) * 60) + Number($ResultTroopsMinutes)
+			Else
+				$aRemainTrainTroopTimer = Number(StringTrimRight($ResultTroops, 1)) ; removing the "m"
+			EndIf
+		EndIf
+
+		If $Spells = True Then
+			If StringInStr($ResultSpells, "h") > 1 Then
+				$ResultSpellsHour = StringSplit($ResultSpells, "h", $STR_NOCOUNT)
+				; $ResultSpellsHour[0] will be the Hour and the $ResultSpellsHour[1] will be the Minutes with the "m" at end
+				$ResultTroopsMinutes = StringTrimRight($ResultSpellsHour[1], 1) ; removing the "m"
+				$aRemainTrainSpellsTimer = (Number($ResultSpellsHour[0]) * 60) + Number($ResultTroopsMinutes)
+			Else
+				$aRemainTrainSpellsTimer = Number(StringTrimRight($ResultSpells, 1)) ; removing the "m"
+			EndIf
+		EndIf
+
+		; Verify the higest value to return in minutes
+		If $aRemainTrainTroopTimer > $aRemainTrainSpellsTimer Then
+			Return $aRemainTrainTroopTimer
+		Else
+			Return $aRemainTrainSpellsTimer
+		EndIf
+	Else
+		SetLog("Can not read the remaining Troops&Spells time!", $COLOR_RED)
+		Return 0
+	EndIf
+
+EndFunc   ;==>RemainTrainTime
