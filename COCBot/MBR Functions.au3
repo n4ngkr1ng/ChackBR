@@ -251,9 +251,9 @@
 #include "functions\Village\ClanLevel.au3"
 #include "functions\Village\StarBonus.au3"
 
-; Close while training
-#include "functions\Psychic Octopus\psychicOctopus.au3"
+;
+; MOD files
+;
 
-; SmartZap files - Added by LunaEclipse
-#include "functions\SmartZap\drillSearch.au3"
-#include "functions\SmartZap\smartZap.au3"
+; AwesomeGamer, LunaEclipse, MikeCoC, Promac, ...
+#include "functions\MOD\Include_Files.au3"

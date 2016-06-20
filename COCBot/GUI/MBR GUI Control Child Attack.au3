@@ -69,7 +69,7 @@ Func cmbDBAlgorithm()
 		_GUI_Value_STATE("HIDE", $groupAttackDBSpell&"#"&$groupIMGAttackDBSpell)
 	EndIf
 	Select
-		Case $iCmbValue = 0 ; Standard Attack
+		Case ( $iCmbValue = 0 ) or ( $iCmbValue = 3 ) ; 0 = Standard Attack .or. 3 = Multi Finger Attack
 			GUISetState(@SW_SHOWNOACTIVATE, $hGUI_DEADBASE_ATTACK_STANDARD)
 			GUISetState(@SW_HIDE, $hGUI_DEADBASE_ATTACK_SCRIPTED)
 			GUISetState(@SW_HIDE, $hGUI_DEADBASE_ATTACK_MILKING)
@@ -96,7 +96,7 @@ Func cmbABAlgorithm()
 		_GUI_Value_STATE("HIDE", $groupAttackABSpell&"#"&$groupIMGAttackABSpell)
 	EndIf
 	Select
-		Case $iCmbValue = 0 ; Standard Attack
+		Case ( $iCmbValue = 0 ) or ( $iCmbValue = 2 ) ; 0 = Standard Attack .or. 2 = Multi Finger Attack
 			GUISetState(@SW_SHOWNOACTIVATE, $hGUI_ACTIVEBASE_ATTACK_STANDARD)
 			GUISetState(@SW_HIDE, $hGUI_ACTIVEBASE_ATTACK_SCRIPTED)
 		Case $iCmbValue = 1 ; Scripted Attack

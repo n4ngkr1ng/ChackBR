@@ -47,6 +47,7 @@
 #include <Process.au3>
 #include <GuiListView.au3>
 #include <GUIToolTip.au3>
+#include <ProgressConstants.au3> ; Added for Splash
 
 Global Const $DEFAULT_HEIGHT = 780
 Global Const $DEFAULT_WIDTH = 860
@@ -909,11 +910,11 @@ Global $itxtRestartDark = 500
 ;Global $iWBMortar
 ;Global $iWBWizTower
 ;Global $iWBXbow
-Global $TroopGroup[10][3] = [["Arch", 1, 1], ["Giant", 2, 5], ["Wall", 4, 2], ["Barb", 0, 1], ["Gobl", 3, 1], ["Heal", 7, 14], ["Pekk", 9, 25], ["Ball", 5, 5], ["Wiza", 6, 4], ["Drag", 8, 20]]
+Global $TroopGroup[10][3] = [["Pekk", 9, 25], ["Drag", 8, 20], ["Heal", 7, 14], ["Ball", 5, 5], ["Giant", 2, 5], ["Wiza", 6, 4], ["Wall", 4, 2], ["Arch", 1, 1], ["Barb", 0, 1], ["Gobl", 3, 1]]
 Global $TroopName[UBound($TroopGroup, 1)]
 Global $TroopNamePosition[UBound($TroopGroup, 1)]
 Global $TroopHeight[UBound($TroopGroup, 1)]
-Global $TroopGroupDark[6][3] = [["Mini", 0, 2], ["Hogs", 1, 5], ["Valk", 2, 8], ["Gole", 3, 30], ["Witc", 4, 12], ["Lava", 5, 30]]
+Global $TroopGroupDark[6][3] = [["Gole", 3, 30], ["Lava", 5, 30], ["Witc", 4, 12], ["Valk", 2, 8], ["Hogs", 1, 5], ["Mini", 0, 2]]
 Global $TroopDarkName[UBound($TroopGroupDark, 1)]
 Global $TroopDarkNamePosition[UBound($TroopGroupDark, 1)]
 Global $TroopDarkHeight[UBound($TroopGroupDark, 1)]
@@ -1430,58 +1431,5 @@ Global $THSnipeBeforeDBEnable = 0 , $THSnipeBeforeLBEnable = 0
 Global $THSnipeBeforeDBTiles = 0 , $THSnipeBeforeLBTiles = 0
 Global $THSnipeBeforeDBScript = 0 , $THSnipeBeforeLBScript = 0
 
-; by AwessomeGamer
-Global $iChkDontRemove, $chkDontRemove
-
-; Close while training variables
-Global $ichkCloseTraining = 1
-Global $minTrainAddition = 1
-Global $maxTrainAddition = 5
-Global $LeaveCoCOpen = 0
-Global $CloseCoCGame = 1
-Global $RandomCoCOpen = 0
-Global $RandomCloseTraining = 0
-Global $RandomCloseTraining2 = 0
-Global $TrainLogoutMaxTime = 1
-Global $TrainLogoutMaxTimeTXT = 15
-
-; Sleep at night variables
-Global $ichkCloseNight = 1
-Global $sleepStart = 0, $sleepEnd = 8
-Global $nextSleepStart = -999, $nextSleepEnd = -999
-
-; Daily attack variables
-Global $ichkLimitAttacks = 1
-Global $rangeAttacksStart = 20, $rangeAttacksEnd = 25
-Global $dailyAttacks = 0, $dailyAttackLimit = 0
-
-; Randomization of functions
-Global $RandomTimer = True
-Global $sTimerRandomHalt
-
-; SmartZap GUI variables - Added by LunaEclipse
-Global $ichkSmartZap = 1
-Global $ichkSmartZapDB = 1
-Global $ichkSmartZapSaveHeroes = 1
-Global $itxtMinDE = 300
-
-; SmartZap stats - Added by LunaEclipse
-Global $smartZapGain = 0
-Global $numLSpellsUsed = 0
-
-; SmartZap Array to hold Total Amount of DE available from Drill at each level (1-6) - Added by LunaEclipse
-Global Const $drillLevelHold[6] = [120, _
-								   225, _
-								   405, _
-								   630, _
-								   960, _
-								   1350]
-
-; SmartZap Array to hold Amount of DE available to steal from Drills at each level (1-6) - Added by LunaEclipse
-Global Const $drillLevelSteal[6] = [59, _
-                                    102, _
-								    172, _
-								    251, _
-								    343, _
-								    479]
-
+; Global Variables - AwesomeGamer, LunaEclipse, MikeCoC, Promac, ...
+#include "functions\MOD\Global_Variables.au3"

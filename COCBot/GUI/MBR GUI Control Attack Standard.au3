@@ -37,6 +37,7 @@ Func chkSmartAttackRedAreaAB()
 		Next
 	EndIf
 EndFunc   ;==>chkSmartAttackRedAreaAB
+
 Func chkRandomSpeedAtkDB()
 	If GUICtrlRead($chkRandomSpeedAtkDB) = $GUI_CHECKED Then
 		;$iChkDBRandomSpeedAtk = 1

@@ -14,6 +14,7 @@
 ; ===============================================================================================================================
 
 Func Alogrithm_MilkingAttack()
+	Local $bADBTemp = $AndroidAdbClicksEnabled
 
 	;--- TH snipe After Milking...
 	If $THSnipeBeforeDBEnable = 1 and $searchTH = "-" Then FindTownHall(True) ; if no previous detect search townhall
@@ -174,7 +175,15 @@ Func Alogrithm_MilkingAttack()
 	EndIf
 	If $MilkAttackAfterScriptedAtk = 1 Then
 		Setlog(_PadStringCenter("Scripted Attack after Miliking ", 54,"="),$color_blue)
+		If $AndroidAdbClicksEnabled Then $AndroidAdbClicksEnabled = False
+		If ( $Android = "BlueStacks" ) Or ( $Android = "BlueStacks2" ) Then
+			If $AndroidAdbClicksEnabled Then 
+				$AndroidAdbClicksEnabled = False
+		   		SetLog( $Android & ": FastClicks Disabled (Unsuported)", $COLOR_GREEN)
+			EndIf
+		EndIf
 		Algorithm_AttackCSV(False,False) ;launch algorithm without launch redarea (allready calculated)
+		If $bADBTemp Then $AndroidAdbClicksEnabled = $bADBTemp
 ;~ 		$iMatchMode = $MA
 ;~ 		PrepareAttack($iMatchMode, True)
 ;~ 		algorithm_AllTroops()

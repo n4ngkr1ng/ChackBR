@@ -20,7 +20,7 @@ Local $x = 25, $y = 40
 		$y += 15
 		$cmbDBAlgorithm = GUICtrlCreateCombo("", $x, $y, 135, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetTip(-1, "")
-			GUICtrlSetData(-1, GetTranslated(624,3,"Standard Attack") & "|" & GetTranslated(624,4,"Scripted Attack") & "|" & GetTranslated(624,5,"Milking Attack"), GetTranslated(624,3,-1))
+			GUICtrlSetData(-1, GetTranslated(624,3,"Standard Attack") & "|" & GetTranslated(624,4,"Scripted Attack") & "|" & GetTranslated(624,5,"Milking Attack"), GetTranslated(624,3,-1)) ; & "|" & "Multi Finger Attack"
 			GUICtrlSetOnEvent(-1, "cmbDBAlgorithm")
 		$y += 25
 		$lblDBSelectTroop=GUICtrlCreateLabel(GetTranslated(624,6,"Only drop these troops") & ":", $x, $y, 135, 18, $SS_LEFT)

@@ -2265,6 +2265,15 @@ EndIf
 
 	cmbScriptNameDB()
 	cmbScriptNameAB()
+
+	; CSV Deployment Speed Mod
+	GUICtrlSetData($sldSelectedSpeedDB, $isldSelectedCSVSpeed[$DB])
+	GUICtrlSetData($sldSelectedSpeedAB, $isldSelectedCSVSpeed[$LB])
+
+	sldSelectedSpeedDB()
+	sldSelectedSpeedAB()
+	; CSV Deployment Speed Mod - end
+
 	If $DevMode = 1 Then GUICtrlSetState($chkmakeIMGCSV, $GUI_SHOW)
     If $makeIMGCSV = 1 Then
 		GUICtrlSetState($chkmakeIMGCSV, $GUI_CHECKED)
@@ -2360,8 +2369,10 @@ _GUICtrlComboBox_SetCurSel($cmbTHSnipeBeforeDBScript, _GUICtrlComboBox_FindStrin
 LoadABSnipeAttacks() ; recreate combo box values
 _GUICtrlComboBox_SetCurSel($cmbTHSnipeBeforeLBScript, _GUICtrlComboBox_FindStringExact($cmbTHSnipeBeforeLBScript, $THSnipeBeforeLBScript))
 
+	; Reenabling window redraw
+	If $bRedrawAtExit Then SetRedrawBotWindow(True)
 
-	; by AwessomeGamer
+	; by AwesomeGamer
 	If $iChkDontRemove = 1 Then
 		GUICtrlSetState($chkDontRemove, $GUI_CHECKED)
 	Else
@@ -2443,8 +2454,5 @@ _GUICtrlComboBox_SetCurSel($cmbTHSnipeBeforeLBScript, _GUICtrlComboBox_FindStrin
 		GUICtrlSetState($chkTrainLogoutMaxTime, $GUI_UNCHECKED)
 	EndIf
 	GUICtrlSetData($txtTrainLogoutMaxTime, $TrainLogoutMaxTimeTXT)	
-
-	; Reenabling window redraw
-	If $bRedrawAtExit Then SetRedrawBotWindow(True)
 
 EndFunc   ;==>applyConfig

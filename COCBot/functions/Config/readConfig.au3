@@ -429,6 +429,10 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 		IniReadS($scmbDBScriptName, $config, "attack", "ScriptDB", "Barch four fingers")
 		IniReadS($scmbABScriptName, $config, "attack", "ScriptAB", "Barch four fingers")
 
+		; CSV Deployment Speed Mod
+		IniReadS($isldSelectedCSVSpeed[$DB], $config, "attack", "CSVSpeedDB", 3)
+		IniReadS($isldSelectedCSVSpeed[$LB], $config, "attack", "CSVSpeedAB", 3)
+
 		IniReadS($iActivateKQCondition, $config, "attack", "ActivateKQ", "Auto")
 		IniReadS($delayActivateKQ, $config, "attack", "delayActivateKQ", "9")
 		$delayActivateKQ *= 1000
@@ -1012,7 +1016,7 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 		$AndroidAdbClicksEnabled = IniRead($config, "android", "adb.clicks.enabled", ($AndroidAdbClicksEnabled ? "1" : "0")) = "1"
 		$AndroidAdbClicksTroopDeploySize = Int(IniRead($config, "android", "adb.clicks.troop.deploy.size", $AndroidAdbClicksTroopDeploySize))
 
-		; by AwessomeGamer
+		; by AwesomeGamer
 		$iChkDontRemove = IniRead($config, "troop", "DontRemove", "0")
 
 		; SmartZap Settings - Added by LunaEclipse

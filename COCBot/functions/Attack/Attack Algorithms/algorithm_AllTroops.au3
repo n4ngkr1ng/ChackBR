@@ -52,6 +52,13 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 
 
 
+	;If ($iMatchMode = $DB and $iAtkAlgorithm[$DB] > 2) or ($iMatchMode = $LB and  $iAtkAlgorithm[$LB] > 1 ) Then
+	;	; Multi Finger Attack
+	;	SetLog("Attacking four finger fight style " & $iChkDeploySettings[$LB], $COLOR_BLUE)
+	;	$nbSides = 5
+	;Else
+	;EndIf
+
 	;############################################# LSpell Attack ############################################################
 	; DropLSpell()
 	;########################################################################################################################
@@ -214,7 +221,7 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 			LauchTroop($i, $nbSides, 0, 1)
 			CheckHeroesHealth()
 			;Else
-			;	 LauchTroop($i, $nbSides, 0, 1, 2)
+			;	LauchTroop($i, $nbSides, 0, 1, 2)
 			;EndIf
 			If _Sleep($iDelayalgorithm_AllTroops5) Then Return
 		Next

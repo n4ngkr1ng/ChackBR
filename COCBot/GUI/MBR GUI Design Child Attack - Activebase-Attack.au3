@@ -20,7 +20,7 @@ Local $x = 25, $y = 40
 		$y += 15
 		$cmbABAlgorithm = GUICtrlCreateCombo("", $x, $y, 135, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetTip(-1, "")
-			GUICtrlSetData(-1, GetTranslated(624,3, -1) & "|" & GetTranslated(624,4, -1) , GetTranslated(624,3,-1))
+			GUICtrlSetData(-1, GetTranslated(624,3, -1) & "|" & GetTranslated(624,4, -1), GetTranslated(624,3,-1)) ; & "|" & "Multi Finger Attack"
 			GUICtrlSetOnEvent(-1, "cmbABAlgorithm")
 		$y += 25
 		$lblABSelectTroop=GUICtrlCreateLabel(GetTranslated(624,6, -1) & ":", $x, $y, 135, 18,$SS_LEFT)

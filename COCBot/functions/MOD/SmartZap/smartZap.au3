@@ -170,8 +170,7 @@ Func smartZap($minDE = -1)
 		; If you have max lightning spells, drop lightning on any level DE drill
 		If $numSpells > (4 - $spellAdjust) Then
 			SetLog("First condition: " & 4 - $spellAdjust & "+ Spells so attack any drill.", $COLOR_FUCHSIA)
-			; zapDrill($dropPoint)
-			PerformZap($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
+			zapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
 			$skippedZap = False
@@ -180,8 +179,7 @@ Func smartZap($minDE = -1)
 		; If you have one less then max, drop it on drills level (3 - drill offset)
 		ElseIf $numSpells > (3 - $spellAdjust) And $aDarkDrills[0][2] > (3 - $drillLvlOffset) Then
 			SetLog("Second condition: Attack Lvl " & 3 - $drillLvlOffset & "+ drills if you have " & 3 - $spellAdjust & "+ spells", $COLOR_FUCHSIA)
-			; zapDrill($dropPoint)
-			PerformZap($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
+			zapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
 			$skippedZap = False
@@ -190,8 +188,7 @@ Func smartZap($minDE = -1)
 		; If the collector is higher than lvl (4 - drill offset) and collector is estimated more than 30% full
 		ElseIf $aDarkDrills[0][2] > (4 - $drillLvlOffset) And ($aDarkDrills[0][3] / $DrillLevelHold[$aDarkDrills[0][2] - 1]) > 0.3 Then
 			SetLog("Third condition: Attack Lvl " & 4 - $drillLvlOffset & "+ drills with more then 30% estimated DE if you have less than " & 4 - $spellAdjust & " spells", $COLOR_FUCHSIA)
-			; zapDrill($dropPoint)
-			PerformZap($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
+			zapDrill($eLSpell, $aDarkDrills[0][0] + $strikeOffsets[0], $aDarkDrills[0][1] + $strikeOffsets[1])
 
 			$performedZap = True
 			$skippedZap = False
@@ -292,18 +289,18 @@ Func smartZap($minDE = -1)
 EndFunc   ;==>smartZap
 
 ; This function taken and modified by the CastSpell function to make Zapping works
-Func PerformZap($ZapSpell, $x, $y)
+Func zapDrill($THSpell, $x, $y)
 
 	Local $Spell = -1
 	Local $name = ""
 
-	If _Sleep(10) Then Return
-	If $Restart = True Then Return
+	; If _Sleep(10) Then Return
+	; If $Restart = True Then Return
 
 	For $i = 0 To UBound($atkTroops) - 1
-		If $atkTroops[$i][0] = $ZapSpell Then
+		If $atkTroops[$i][0] = $THSpell Then
 			$Spell = $i
-			$name = NameOfTroop($ZapSpell, 0)
+			$name = NameOfTroop($THSpell, 0)
 		EndIf
 	Next
 
@@ -316,4 +313,4 @@ Func PerformZap($ZapSpell, $x, $y)
 		If $debugSetLog = 1 Then SetLog("No " & $name & " Found")
 	EndIf
 
-EndFunc   ;==>PerformZap
+EndFunc   ;==>zapDrill

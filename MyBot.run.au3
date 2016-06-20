@@ -27,12 +27,8 @@
 #pragma compile(Out, MyBot.run.exe)  ; Required
 
 ;~ Boost launch time by increasing process priority (will be restored again when finished launching)
-Local $iBotProcessPriority
-If $CmdLine[0] < 2 Then
-	$iBotProcessPriority = _ProcessGetPriority(@AutoItPID)
-	ProcessSetPriority(@AutoItPID, $PROCESS_ABOVENORMAL)
-Endif
-
+Local $iBotProcessPriority = _ProcessGetPriority(@AutoItPID)
+ProcessSetPriority(@AutoItPID, $PROCESS_ABOVENORMAL)
 
 Global $iBotLaunchTime = 0
 Local $hBotLaunchTime = TimerInit()
@@ -66,10 +62,25 @@ Local $sModversion
 ; "1201" ; SmartZap, FastClicks, CCWT, DEB
 ; "1202" ; CCWT user set max sleep time
 ; "1203" ; CCWT try request troops before
-; "1204" ; Allow BOT cpu priority only for single process
-$sModversion = "1205" ; Updates for CSV Attack Files ( Force All Troops Deploy )
+; "1204" ; Valks Train HotFix
+; "1205" ; CSV Fast Deployment Fusion - @MikeCoC
+; "1206" ; CSV Deploy Speed Mod - @MikeCoC
+; "1207" ; Allow BOT cpu priority only for single process
+; "1208" ; Attack Now Button ( Attack Plan, Search & Attack, Active Base, Attack )
+; "1209" ; Add 8F CSV Attack Files From AsesomeGamer 
+; "1210" ; Updates for "CSV Fast Deployment Fusion" ( Speed Up FF )
+; "1211" ; Updates for CSV Attack Files ( Force All Troops Deploy )
+; "1212" ; Fix for King activated on deploy
+; "1213" ; CSV Fusion support for BlueStacks ( AwesomeGames .csv )
+; "1214" ; Updates for "CSV Fast Deployment" ( 2016.14.06 )
+; "1215" ; Updates for "CSV Fast Deployment" ( 2016.15.06 )
+; "1216" ; CSV Fast Deployment ( Revert Back to r1213 )
+; "1217" ; Pre-Train spells when army camps and spell factory are full - @MikeCoC
+; "1218" ; Disable FastClicks when Attack using "CSV Fast Deployment"
+; "1219" ; Add SplashScreen while loading MyBot - @MikeCoC
+$sModversion = "1220" ; Enable FastClicks while using "CSV Fast Deployment"
 $sBotVersion = "v6.1.2" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
-$sBotTitle = "My Bot " & $sBotVersion & ".1.s" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
+$sBotTitle = "My Bot " & $sBotVersion & ".1.l" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 
 Opt("WinTitleMatchMode", 3) ; Window Title exact match mode
 #include "COCBot\functions\Android\Android.au3"
@@ -183,9 +194,7 @@ $iBotLaunchTime = TimerDiff($hBotLaunchTime)
 SetDebugLog("MyBot.run launch time " & Round($iBotLaunchTime) & " ms.")
 
 ;~ Restore process priority
-If $aCmdLine[0] < 2 Then
-	ProcessSetPriority(@AutoItPID, $iBotProcessPriority)
-EndIF
+ProcessSetPriority(@AutoItPID, $iBotProcessPriority)
 
 ;AutoStart Bot if request
 AutoStart()
@@ -523,6 +532,13 @@ Func AttackMain() ;Main control for attack functions
 EndFunc   ;==>AttackMain
 
 Func Attack() ;Selects which algorithm
+	Local $bADBTemp = $AndroidAdbClicksEnabled
+	If ( $Android = "BlueStacks" ) Or ( $Android = "BlueStacks2" ) Then
+		If $AndroidAdbClicksEnabled Then 
+			$AndroidAdbClicksEnabled = False
+	   	SetLog( $Android & ": FastClicks Disabled (Unsuported)", $COLOR_GREEN)
+		EndIf
+	EndIf
 	SetLog(" ====== Start Attack ====== ", $COLOR_GREEN)
 	If  ($iMatchMode = $DB and $iAtkAlgorithm[$DB] = 1) or ($iMatchMode = $LB and  $iAtkAlgorithm[$LB] = 1) Then
 		If $debugsetlog=1 Then Setlog("start scripted attack",$COLOR_RED)
@@ -531,9 +547,15 @@ Func Attack() ;Selects which algorithm
 		If $debugsetlog=1 Then Setlog("start milking attack",$COLOR_RED)
 		Alogrithm_MilkingAttack()
 	Else
-		If $debugsetlog=1 Then Setlog("start standard attack",$COLOR_RED)
-		algorithm_AllTroops()
+		If ($iMatchMode = $DB and $iAtkAlgorithm[$DB] > 2) or ($iMatchMode = $LB and  $iAtkAlgorithm[$LB] > 1 ) Then
+			If $debugsetlog=1 Then Setlog("Start Multi Finger Attack",$COLOR_RED)
+			algorithm_AtkTroops()
+		Else
+			If $debugsetlog=1 Then Setlog("Start standard attack",$COLOR_RED)
+			algorithm_AllTroops()
+		EndIf
 	EndIf
+	If $bADBTemp Then $AndroidAdbClicksEnabled = $bADBTemp
 EndFunc   ;==>Attack
 
 

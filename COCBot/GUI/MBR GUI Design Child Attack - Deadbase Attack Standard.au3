@@ -21,7 +21,7 @@ Local $x = 25, $y = 20
 ;	$x -= 15
 		$lblDBmode = GUICtrlCreateLabel(GetTranslated(608,2,"Troop Drop Order"),$x, $y, 143,18,$SS_LEFT)
 	$y += 15
-		$cmbStandardAlgorithmDB = GUICtrlCreateCombo("", $x, $y, 150, Default, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+		$cmbStandardAlgorithmDB = GUICtrlCreateCombo("", $x, $y, 176, Default, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetData(-1, GetTranslated(608,25,"Default(All Troops)")&"|Barch/BAM/BAG|GiBarch", GetTranslated(608,25, -1))
 			GUICtrlSetTip(-1, GetTranslated(608,33,"Select a preset troop drop order.")&@CRLF&GetTranslated(608,34,"Each option deploys troops in a different order and in different waves")&@CRLF&GetTranslated(608,35,"Only the troops selected in the ""Only drop these troops"" option will be dropped"))
 	$y += 25
@@ -35,12 +35,12 @@ Local $x = 25, $y = 20
 			GUICtrlSetTip(-1, $txtTip)
 		$cmbUnitDelayDB = GUICtrlCreateCombo("", $x + 55, $y, 36, 21, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetData(-1, "1|2|3|4|5|6|7|8|9|10", "5")
-		$lblWaveDelayDB = GUICtrlCreateLabel(GetTranslated(608,15, "Wave") & ":", $x + 100, $y + 5, -1, -1)
+			GUICtrlSetData(-1, "0|1|2|3|4|5|6|7|8|9|10", "5")
+		$lblWaveDelayDB = GUICtrlCreateLabel(GetTranslated(608,15, "Wave") & ":", $x + 101, $y + 5, -1, -1)
 			GUICtrlSetTip(-1, $txtTip)
-		$cmbWaveDelayDB = GUICtrlCreateCombo("", $x + 140, $y, 36, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+		$cmbWaveDelayDB = GUICtrlCreateCombo("", $x + 139, $y, 36, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetData(-1, "1|2|3|4|5|6|7|8|9|10", "5")
+			GUICtrlSetData(-1, "0|1|2|3|4|5|6|7|8|9|10", "5")
 		$y += 22
 		$chkRandomSpeedAtkDB = GUICtrlCreateCheckbox(GetTranslated(608,16, "Randomize delay for Units && Waves"), $x, $y, -1, -1)
 			GUICtrlSetTip(-1, $txtTip)
@@ -76,6 +76,17 @@ Local $x = 25, $y = 20
  			GUICtrlSetTip(-1, $txtTip)
 		$picAttackNearDarkElixirDrillDB = GUICtrlCreateIcon($pIconLib, $eIcnDrill, $x + 20 , $y - 3, 24, 24)
  			GUICtrlSetTip(-1, $txtTip)
+		$x =  25
+		$y = 264
+		$lblDBMultiFinger = GUICtrlCreateLabel("Attack Style:", $x, $y, 148, 18, $SS_LEFT)
+		$y += 15
+		$cmbDBMultiFinger = GUICtrlCreateCombo("", $x, $y, 176, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+			$txtTip = "Select which multi finger attack style you would like." & @CRLF & @CRLF & _ 
+				      "     Random will chose one of the attacks at random." & @CRLF & _ 
+				      "     Four Finger and Eight Finger attacks will attack from all 4 sides at once."
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetData(-1, "Random" & "|" & "Four Finger Standard" & "|" & "Four Finger Spiral Left" & "|" & "Four Finger Spiral Right" & "|" & "Eight Finger Blossom" & "|" & "Eight Finger Implosion" & "|" & "Eight Finger Pin Wheel Spiral Left" & "|" & "Eight Finger Pin Wheel Spiral Right", "Random")
+			GUICtrlSetOnEvent(-1, "cmbDBMultiFinger")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 ;GUISetState()
