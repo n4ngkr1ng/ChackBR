@@ -267,9 +267,9 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 							Else
 								If $AndroidAdbClicksEnabled Then
 									; AttackClick($pixel[0], $pixel[1], $qty2, SetSleep(0), 0, "#0666") ; Fastest
-									AttackClick($pixel[0], $pixel[1], $qty2, Int($delayPoint/4), 0, "#0666")
+									AttackFClick($pixel[0], $pixel[1], $qty2, Int($delayPoint/4), 0, "#0666")
 								Else
-									AttackClick($pixel[0], $pixel[1], $qty2, $delayPoint, 0, "#0666")
+									AttackFClick($pixel[0], $pixel[1], $qty2, $delayPoint, 0, "#0666")
 								EndIf
 							EndIf
 						Case $eKing
@@ -373,3 +373,11 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 	EndIf
 
 EndFunc   ;==>DropTroopFromINI
+
+Func AttackFClick($x, $y, $times = 1, $speed = 0, $afterDelay = 0, $debugtxt = "")
+   Local $timer = TimerInit()
+   Local $result = Click($x, $y, $times, $speed, $debugtxt)
+   Local $delay = $times * $speed + $afterDelay - TimerDiff($timer)
+   If IsKeepClicksActive() = False And $delay > 0 Then _Sleep($delay, False)
+   Return $result
+EndFunc
