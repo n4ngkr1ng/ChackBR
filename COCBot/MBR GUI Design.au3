@@ -27,7 +27,7 @@ Global $hImageList = 0
 ;~ ------------------------------------------------------
 ;~ Main GUI
 ;~ ------------------------------------------------------
-
+SplashStep("Loading Main GUI...")
 $frmBot = GUICreate($sBotTitle, $_GUI_MAIN_WIDTH, $_GUI_MAIN_HEIGHT)
 ; group multiple bot windows using _WindowAppId
 _WindowAppId($frmBot, "MyBot.run")
@@ -40,7 +40,7 @@ $hToolTip = _GUIToolTip_Create($frmBot) ; tool tips for URL links etc
 ;~ ------------------------------------------------------
 ;~ Header Menu
 ;~ ------------------------------------------------------
-
+SplashStep("Loading Header...")
 $idMENU_DONATE = GUICtrlCreateMenu("&" & GetTranslated(601,18,"Paypal Donate?"))
 $idMENU_DONATE_SUPPORT = GUICtrlCreateMenuItem(GetTranslated(601,19,"Support the development"), $idMENU_DONATE)
 GUICtrlSetOnEvent(-1, "")
@@ -52,15 +52,23 @@ GUICtrlSetOnEvent(-1, "")
 ;~ ------------------------------------------------------
 ;~ GUI Bottom
 ;~ ------------------------------------------------------
+SplashStep("Loading GUI Bottom...")
 #include "GUI\MBR GUI Design Bottom.au3"
 
 
 ;~ ------------------------------------------------------
 ;~ GUI Child Files
 ;~ ------------------------------------------------------
+SplashStep("Loading General tab...")
 #include "GUI\MBR GUI Design Child General.au3" ; includes '$FirstControlToHide" on GUI
+
+SplashStep("Loading Village tab...")
 #include "GUI\MBR GUI Design Child Village.au3"
+
+SplashStep("Loading Attack tab...")
 #include "GUI\MBR GUI Design Child Attack.au3"
+
+SplashStep("Loading Bot tab...")
 #include "GUI\MBR GUI Design Child Bot.au3"
 ;GUISetState()
 GUISwitch($frmBot)
@@ -73,6 +81,7 @@ $tabBot = GUICtrlCreateTabItem(GetTranslated(600,4,"Bot"))
 ;~ -------------------------------------------------------------
 ;~ About Us Tab
 ;~ -------------------------------------------------------------
+SplashStep("Loading About Us tab...")
 $tabAboutUs = GUICtrlCreateTabItem(GetTranslated(600,5, "About Us"))
 Local $x = 30, $y = 150
 	$grpCredits = GUICtrlCreateGroup("Credits", $x - 20, $y - 20, 450, 375)
@@ -131,6 +140,7 @@ GUICtrlCreateTabItem("")
 ;~ GUI init
 ;~ -------------------------------------------------------------
 
+SplashStep("Initializing GUI...")
 #Region ; Bind Icon images to all Tabs in all GUI windows (main and children)
 Bind_ImageList($tabMain)
 Bind_ImageList($hGUI_VILLAGE_TAB)
@@ -156,7 +166,10 @@ GUICtrlSetState($hGUI_LOG, $GUI_SHOW)
 ;~ -------------------------------------------------------------
 ;~ Bottom status bar
 ;~ -------------------------------------------------------------
-GUISetState(@SW_SHOW)
+If $hSplash <> "" Then
+	GUIDelete($hSplash) ; Delete the splash screen since we don't need it anymore
+EndIf
+GUISetState(@SW_SHOW, $frmBot)
 $frmBotMinimized = False
 
 $statLog = _GUICtrlStatusBar_Create($frmBot)

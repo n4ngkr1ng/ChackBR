@@ -503,6 +503,11 @@ Func saveConfig() ;Saves the controls settings to the config
 	$itxtRestartDark = GUICtrlRead($txtRestartDark)
 
 	; bot options gui -> variables ----------------------------------------------------
+	If GUICtrlRead($chkDisableSplash) = $GUI_CHECKED Then
+		$ichkDisableSplash = 1
+	Else
+		$ichkDisableSplash = 0
+	EndIf
 	If GUICtrlRead($chkVersion) = $GUI_CHECKED Then
 		$ichkVersion = 1
 	Else
@@ -2139,6 +2144,7 @@ Func saveConfig() ;Saves the controls settings to the config
 
 	IniWriteS($config, "General", "ChkLanguage", $ichkLanguage)
 
+	IniWriteS($config, "General", "ChkDisableSplash", $ichkDisableSplash)
 	IniWriteS($config, "General", "ChkVersion", $ichkVersion)
 
 
@@ -2235,8 +2241,19 @@ Func saveConfig() ;Saves the controls settings to the config
 	IniWriteS($config, "collectors", "tolerance", $toleranceOffset)
 
 	; Android Configuration
+	IniWriteS($config, "android", "game.package", $AndroidGamePackage)
+	IniWriteS($config, "android", "game.class", $AndroidGameClass)
+	IniWriteS($config, "android", "check.time.lag.enabled", ($AndroidCheckTimeLagEnabled ? "1" : "0"))
+	IniWriteS($config, "android", "adb.screencap.timeout.min", $AndroidAdbScreencapTimeoutMin)
+	IniWriteS($config, "android", "adb.screencap.timeout.max", $AndroidAdbScreencapTimeoutMax)
+	IniWriteS($config, "android", "adb.screencap.timeout.dynamic", $AndroidAdbScreencapTimeoutDynamic)
+	IniWriteS($config, "android", "adb.input.enabled", ($AndroidAdbInputEnabled ? "1" : "0"))
+	IniWriteS($config, "android", "adb.click.enabled", ($AndroidAdbClickEnabled ? "1" : "0"))
+	IniWriteS($config, "android", "adb.click.group", $AndroidAdbClickGroup)
 	IniWriteS($config, "android", "adb.clicks.enabled", ($AndroidAdbClicksEnabled ? "1" : "0"))
 	IniWriteS($config, "android", "adb.clicks.troop.deploy.size", $AndroidAdbClicksTroopDeploySize)
+	IniWriteS($config, "android", "no.focus.tampering", ($NoFocusTampering ? "1" : "0"))
+
 
 	If $hFile <> -1 Then FileClose($hFile)
 
@@ -2245,13 +2262,6 @@ Func saveConfig() ;Saves the controls settings to the config
 		IniWriteS($config, "troop", "DontRemove", 1)
 	Else
 		IniWriteS($config, "troop", "DontRemove", 0)
-	EndIf
-
-	; Misc Battle Settings - Added by LunaEclipse
-	If GUICtrlRead($chkFastADBClicks) = $GUI_CHECKED Then
-		IniWrite($config, "Fast Clicks", "UseADBFastClicks", 1)
-	Else
-		IniWrite($config, "Fast Clicks", "UseADBFastClicks", 0)
 	EndIf
 
 	; SmartZap Settings - Added by LunaEclipse

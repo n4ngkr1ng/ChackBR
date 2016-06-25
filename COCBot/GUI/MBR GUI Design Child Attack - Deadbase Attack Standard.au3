@@ -76,17 +76,17 @@ Local $x = 25, $y = 20
  			GUICtrlSetTip(-1, $txtTip)
 		$picAttackNearDarkElixirDrillDB = GUICtrlCreateIcon($pIconLib, $eIcnDrill, $x + 20 , $y - 3, 24, 24)
  			GUICtrlSetTip(-1, $txtTip)
-		$x =  25
-		$y = 264
-		$lblDBMultiFinger = GUICtrlCreateLabel("Attack Style:", $x, $y, 148, 18, $SS_LEFT)
-		$y += 15
-		$cmbDBMultiFinger = GUICtrlCreateCombo("", $x, $y, 176, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-			$txtTip = "Select which multi finger attack style you would like." & @CRLF & @CRLF & _ 
-				      "     Random will chose one of the attacks at random." & @CRLF & _ 
-				      "     Four Finger and Eight Finger attacks will attack from all 4 sides at once."
-			GUICtrlSetTip(-1, $txtTip)
-			GUICtrlSetData(-1, "Random" & "|" & "Four Finger Standard" & "|" & "Four Finger Spiral Left" & "|" & "Four Finger Spiral Right" & "|" & "Eight Finger Blossom" & "|" & "Eight Finger Implosion" & "|" & "Eight Finger Pin Wheel Spiral Left" & "|" & "Eight Finger Pin Wheel Spiral Right", "Random")
-			GUICtrlSetOnEvent(-1, "cmbDBMultiFinger")
+		;$x =  25
+		;$y = 264
+		;$lblDBMultiFinger = GUICtrlCreateLabel("Attack Style:", $x, $y, 148, 18, $SS_LEFT)
+		;$y += 15
+		;$cmbDBMultiFinger = GUICtrlCreateCombo("", $x, $y, 176, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+		;	$txtTip = "Select which multi finger attack style you would like." & @CRLF & @CRLF & _ 
+		;		      "     Random will chose one of the attacks at random." & @CRLF & _ 
+		;		      "     Four Finger and Eight Finger attacks will attack from all 4 sides at once."
+		;	GUICtrlSetTip(-1, $txtTip)
+		;	GUICtrlSetData(-1, "Random" & "|" & "Four Finger Standard" & "|" & "Four Finger Spiral Left" & "|" & "Four Finger Spiral Right" & "|" & "Eight Finger Blossom" & "|" & "Eight Finger Implosion" & "|" & "Eight Finger Pin Wheel Spiral Left" & "|" & "Eight Finger Pin Wheel Spiral Right", "Random")
+		;	GUICtrlSetOnEvent(-1, "cmbDBMultiFinger")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 ;GUISetState()

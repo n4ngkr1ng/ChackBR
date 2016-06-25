@@ -52,13 +52,6 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 
 
 
-	;If ($iMatchMode = $DB and $iAtkAlgorithm[$DB] > 2) or ($iMatchMode = $LB and  $iAtkAlgorithm[$LB] > 1 ) Then
-	;	; Multi Finger Attack
-	;	SetLog("Attacking four finger fight style " & $iChkDeploySettings[$LB], $COLOR_BLUE)
-	;	$nbSides = 5
-	;Else
-	;EndIf
-
 	;############################################# LSpell Attack ############################################################
 	; DropLSpell()
 	;########################################################################################################################
@@ -262,10 +255,10 @@ Func SetSlotSpecialTroops()
 			$Warden = $i
 		EndIf
 	Next
-	If $debugSetlog = 1 Then SetLog("Use king SLOT n° " & $King, $COLOR_PURPLE)
-	If $debugSetlog = 1 Then SetLog("Use queen SLOT n° " & $Queen, $COLOR_PURPLE)
-	If $debugSetlog = 1 Then SetLog("Use CC SLOT n° " & $CC, $COLOR_PURPLE)
-	If $debugSetlog = 1 Then SetLog("Use Warden SLOT n° " & $Warden, $COLOR_PURPLE)
+	If $debugSetlog = 1 Then SetLog("Use king SLOT # " & $King, $COLOR_PURPLE)
+	If $debugSetlog = 1 Then SetLog("Use queen SLOT # " & $Queen, $COLOR_PURPLE)
+	If $debugSetlog = 1 Then SetLog("Use CC SLOT # " & $CC, $COLOR_PURPLE)
+	If $debugSetlog = 1 Then SetLog("Use Warden SLOT # " & $Warden, $COLOR_PURPLE)
 EndFunc   ;==>SetSlotSpecialTroops
 
 Func CloseBattle()

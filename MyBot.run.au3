@@ -78,10 +78,18 @@ Local $sModversion
 ; "1217" ; Pre-Train spells when army camps and spell factory are full - @MikeCoC
 ; "1218" ; Disable FastClicks when Attack using "CSV Fast Deployment"
 ; "1219" ; Add SplashScreen while loading MyBot - @MikeCoC
-$sModversion = "1220" ; Enable FastClicks while using "CSV Fast Deployment"
-$sBotVersion = "v6.1.2" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
-$sBotTitle = "My Bot " & $sBotVersion & ".1.l" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
+; "1220" ; Enable FastClicks while using "CSV Fast Deployment"
+; "1221" ; SplashScreen: Add Option to Disable It
+$sModversion = "1301" ; Upgrade to MyBot v6.1.3
+$sBotVersion = "v6.1.3" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
+$sBotTitle = "My Bot " & $sBotVersion & ".r" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 
+Global $sBotTitleDefault = $sBotTitle
+
+$ichkDisableSplash = IniRead($config, "General", "ChkDisableSplash", "0")
+#include "COCBot\GUI\MBR GUI Design Splash.au3"
+
+SplashStep("Loading Android functions...")
 Opt("WinTitleMatchMode", 3) ; Window Title exact match mode
 #include "COCBot\functions\Android\Android.au3"
 
@@ -89,12 +97,15 @@ Opt("WinTitleMatchMode", 3) ; Window Title exact match mode
 #include "COCBot\functions\Other\Multilanguage.au3"
 DetectLanguage()
 
+SplashStep("Detecting Android...")
 If $aCmdLine[0] < 2 Then
 	DetectRunningAndroid()
 	If Not $FoundRunningAndroid Then DetectInstalledAndroid()
 EndIf
 ; Update Bot title
 $sBotTitle = $sBotTitle & "(" & ($AndroidInstance <> "" ? $AndroidInstance : $Android) & ")" ;Do not change this. If you do, multiple instances will not work.
+
+UpdateSplashTitle($sBotTitle)
 
 If $bBotLaunchOption_Restart = True Then
    If CloseRunningBot($sBotTitle) = True Then
