@@ -174,7 +174,6 @@ Func Alogrithm_MilkingAttack()
 	EndIf
 	If $MilkAttackAfterScriptedAtk = 1 Then
 		Setlog(_PadStringCenter("Scripted Attack after Miliking ", 54,"="),$color_blue)
-		If $AndroidAdbClicksEnabled Then $AndroidAdbClicksEnabled = False
 		Algorithm_AttackCSV(False,False) ;launch algorithm without launch redarea (allready calculated)
 ;~ 		$iMatchMode = $MA
 ;~ 		PrepareAttack($iMatchMode, True)

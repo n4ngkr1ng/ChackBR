@@ -186,7 +186,7 @@ Func BrewSpells()
 		EndIf
 	EndIf
 
-	If $numFactoryDarkSpellAvaiables = 1 And ($iPoisonSpellComp > 0 Or $iEarthSpellComp > 0 Or $iHasteSpellComp > 0) Then
+	If $numFactoryDarkSpellAvaiables = 1 And ($iPoisonSpellComp + $iEarthSpellComp + $iHasteSpellComp) > 0 Then
 		$iBarrHere = 0
 		While Not (isDarkSpellFactory())
 			If Not (IsTrainPage()) Then Return

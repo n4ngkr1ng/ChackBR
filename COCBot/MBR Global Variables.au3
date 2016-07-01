@@ -1086,8 +1086,8 @@ Global $iPlannedattackHours[24]
 For $i = 0 To 23
 	$iPlannedattackHours[$i] = 1
 Next
-Global $iPlannedAttackWeekDays[8]
-For $i = 0 To 7
+Global $iPlannedAttackWeekDays[7]
+For $i = 0 To 6
 	$iPlannedAttackWeekDays[$i] = 1
 Next
 Global $hourLoot
@@ -1433,5 +1433,7 @@ Global $THSnipeBeforeDBEnable = 0 , $THSnipeBeforeLBEnable = 0
 Global $THSnipeBeforeDBTiles = 0 , $THSnipeBeforeLBTiles = 0
 Global $THSnipeBeforeDBScript = 0 , $THSnipeBeforeLBScript = 0
 
+;
 ; Global Variables - AwesomeGamer, LunaEclipse, MikeCoC, Promac, ...
+;
 #include "functions\MOD\Global_Variables.au3"

@@ -885,6 +885,7 @@ Func Train()
 					EndIf
 					If $debugsetlogTrain = 1 And $icount = 100 Then SetLog("Train warning 6", $COLOR_PURPLE)
 				EndIf
+
 				If _Sleep($iDelayTrain2) Then ExitLoop
 				If Not (IsTrainPage()) Then Return ; exit from train if no train page
 				Switch $darkbarrackTroop[$brrDarkNum - 1]
