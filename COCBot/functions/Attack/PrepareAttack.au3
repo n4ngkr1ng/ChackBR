@@ -6,7 +6,7 @@
 ;                  $Remaining           - [optional] Flag for when checking remaining troops. Default is False.
 ; Return values .: None
 ; Author ........:
-; Modified ......:
+; Modified ......: mikemikemikecoc (2016)
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2016
 ;                  MyBot is distributed under the terms of the GNU GPL
 ; Related .......:
