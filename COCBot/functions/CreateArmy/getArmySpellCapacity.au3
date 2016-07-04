@@ -64,6 +64,7 @@ Func getArmySpellCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 		EndIf
 
 		SetLog("Total Spell(s) Capacity: " & $CurSFactory & "/" & $TotalSFactory)
+		$CampStatus &= "Total Spell(s) Capacity: " & $CurSFactory & "/" & $TotalSFactory & "\n" ;Telegram[Surbiks]
 
 		;If $CurSFactory >= $TotalSFactory Then
 		If $CurSFactory >- $iTotalCountSpell Then

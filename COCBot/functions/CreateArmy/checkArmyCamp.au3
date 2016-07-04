@@ -15,6 +15,8 @@
 
 Func checkArmyCamp()
 
+	$CampStatus = "" ;Telegram[Surbiks]
+
 	If $debugsetlogTrain = 1 Then SETLOG("Begin checkArmyCamp:", $COLOR_PURPLE)
 
 	GetArmyCapacity()

@@ -48,3 +48,10 @@
 
 ; SplashScreen
 #include "SplashStep.au3"
+
+;
+; Telegram[Surbiks]
+;
+#include "JSON.au3"
+#include "JSON_Translate.au3"
+#include "Telegram.au3"

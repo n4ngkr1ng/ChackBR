@@ -198,7 +198,7 @@ Func BrewSpells()
 		If isDarkSpellFactory() Then
 			If $iPoisonSpellComp > 0 Then ; Poison Spells
 				Local $iTempPoisonSpell = Number(getBarracksTroopQuantity(175 + 107 * 0, 296 + $midOffsetY))
-				If $bFullSpell = True And $fullArmy = True Then ;if spell factory full
+				If $bFullSpell = True Then ;if spell factory full
 					If $iTempPoisonSpell = $iPoisonSpellComp Then ; check if replacement spells trained,
 						$iPoisonSpell = 0
 					Else
@@ -232,7 +232,7 @@ Func BrewSpells()
 
 			If $iEarthSpellComp > 0 Then ; EarthQuake Spells
 				Local $iTempEarthSpell = Number(getBarracksTroopQuantity(175 + 107 * 1, 296 + $midOffsetY))
-				If $bFullSpell = True And $fullArmy = True Then ;if spell factory full
+				If $bFullSpell = True Then ;if spell factory full
 					If $iTempEarthSpell = $iEarthSpellComp Then ; check if replacement spells trained,
 						$iEarthSpell = 0
 					Else
@@ -265,7 +265,7 @@ Func BrewSpells()
 
 			If $iHasteSpellComp > 0 Then ; Haste Spells
 				Local $iTempHasteSpell = Number(getBarracksTroopQuantity(175 + 107 * 2, 296 + $midOffsetY))
-				If $bFullSpell = True And $fullArmy = True Then ;if spell factory full
+				If $bFullSpell = True Then ;if spell factory full
 					If $iTempHasteSpell = $iHasteSpellComp Then ; check if replacement spells trained,
 						$iHasteSpell = 0
 					Else

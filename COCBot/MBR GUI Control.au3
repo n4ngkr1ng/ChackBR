@@ -873,7 +873,9 @@ Func Bind_ImageList($nCtrl)
 
 		Case $hGUI_NOTIFY_TAB
 			; the icons for NOTIFY tab
-			Local $aIconIndex[2] = [$eIcnPushBullet, $eIcnOptions]
+			;Telegram[Surbiks]
+			Local $aIconIndex[3] = [$eIcnPushBullet, $eIcnTelegram, $eIcnOptions]
+			;Telegram
 
 		Case $hGUI_ATTACK_TAB
 			; the icons for attack tab

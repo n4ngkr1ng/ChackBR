@@ -82,7 +82,8 @@ Local $sModversion
 ; "1221" ; SplashScreen: Add Option to Disable It
 ; "1301" ; Upgrade to MyBot v6.1.3
 ; "1401" ; Upgrade to MyBot v6.1.4
-$sModversion = "1402" ; Update Logo, Train Big First
+; "1402" ; Update Logo, Train Big First
+$sModversion = "1403" ; Update for Pre-Train spells + Telegram
 $sBotVersion = "v6.1.4" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
 $sBotTitle = "My Bot " & $sBotVersion & ".r" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 
@@ -264,7 +265,7 @@ Func runBot() ;Bot that runs everything in order
 			If _Sleep($iDelayRunBot2) Then Return
 			checkMainScreen(False)
 			If $Restart = True Then ContinueLoop
-			If $RequestScreenshot = 1 Then PushMsg("RequestScreenshot")
+			If ($RequestScreenshot = 1 Or $TelegramRequestScreenshot = 1) Then PushMsg("RequestScreenshot") ;Telegram[Surbiks]
 			If _Sleep($iDelayRunBot3) Then Return
 			VillageReport()
 			If $OutOfGold = 1 And (Number($iGoldCurrent) >= Number($itxtRestartGold)) Then ; check if enough gold to begin searching again
@@ -404,7 +405,7 @@ Func Idle() ;Sequence that runs until Full Army
 	While $fullArmy = False Or $bFullArmyHero = False
 		checkAndroidTimeLag()
 
-		If $RequestScreenshot = 1 Then PushMsg("RequestScreenshot")
+		If ($RequestScreenshot = 1 Or $TelegramRequestScreenshot = 1) Then PushMsg("RequestScreenshot") ;Telegram[Surbiks]
 		If _Sleep($iDelayIdle1) Then Return
 		If $CommandStop = -1 Then SetLog("====== Waiting for full army ======", $COLOR_GREEN)
 		Local $hTimer = TimerInit()

@@ -256,5 +256,5 @@
 ; MOD files
 ;
 
-; AwesomeGamer, LunaEclipse, MikeCoC, Promac, ...
+; AwesomeGamer, LunaEclipse, MikeCoC, Promac, Telegram, ...
 #include "functions\MOD\Include_Files.au3"

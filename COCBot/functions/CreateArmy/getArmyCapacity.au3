@@ -115,9 +115,11 @@ Func getArmyCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 	If $TotalCamp > 0 Then
 		SetLog("Total Army Camp capacity: " & $CurCamp & "/" & $TotalCamp & " (" & Int($CurCamp / $TotalCamp * 100) & "%)")
 		$ArmyCapacity = Int($CurCamp / $TotalCamp * 100)
+		$CampStatus &= "Total Army Camp capacity: " & $CurCamp & "/" & $TotalCamp & " (" & Int($CurCamp / $TotalCamp * 100) & "%)\n" ;Telegram[Surbiks]
 	Else
 		SetLog("Total Army Camp capacity: " & $CurCamp & "/" & $TotalCamp)
 		$ArmyCapacity = 0
+		$CampStatus &= "Total Army Camp capacity: " & $CurCamp & "/" & $TotalCamp & "\n" ;Telegram[Surbiks]
 	EndIf
 
 	If ($CurCamp >= ($TotalCamp * $fulltroop / 100)) And $CommandStop = -1 Then
