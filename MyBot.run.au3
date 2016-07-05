@@ -83,8 +83,9 @@ Local $sModversion
 ; "1301" ; Upgrade to MyBot v6.1.3
 ; "1401" ; Upgrade to MyBot v6.1.4
 ; "1402" ; Update Logo, Train Big First
-$sModversion = "1403" ; Update for Pre-Train spells + Telegram
-$sBotVersion = "v6.1.4" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
+; "1403" ; Telegram
+$sModversion = "1404" ; Remove Pre-Train spells
+$sBotVersion = "b6.1.4" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
 $sBotTitle = "My Bot " & $sBotVersion & ".r" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 
 Global $sBotTitleDefault = $sBotTitle
