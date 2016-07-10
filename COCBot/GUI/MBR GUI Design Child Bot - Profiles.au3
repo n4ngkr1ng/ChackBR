@@ -21,8 +21,8 @@ $hGUI_Profiles = GUICreate("", $_GUI_MAIN_WIDTH - 28, $_GUI_MAIN_HEIGHT - 255 - 
 
 GUISwitch($hGUI_Profiles)
 
-Local $x = 20, $y = 25
-	$grpProfiles = GUICtrlCreateGroup(GetTranslated(637,1, "Switch Profiles"), $x - 20, $y - 20, 440, 85)
+Local $x = 20, $y = 23
+	$grpProfiles = GUICtrlCreateGroup(GetTranslated(637,1, "Switch Profiles"), $x - 20, $y - 20, 440, 55)
 		;$y -= 5
 		$x -= 5
 		;$lblProfile = GUICtrlCreateLabel(GetTranslated(7,27, "Current Profile") & ":", $x, $y, -1, -1)
@@ -114,8 +114,8 @@ Local $x = 20, $y = 25
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	; Close When Training Settings
-	Local $x = 20, $y = 110
-	$grpTrainingClose = GUICtrlCreateGroup("Training Settings", $x - 20, $y - 20, 440, 275)
+	Local $x = 20, $y = 80
+	$grpTrainingClose = GUICtrlCreateGroup("Training Settings", $x - 20, $y - 20, 440, 212)
 		$x -= 5
 		GUICtrlCreateIcon ($pIconLib, $eIcnSleepMode, $x - 0, $y + 40, 48, 48)
 		$chkUseTrainingClose = GUICtrlCreateCheckbox("Enable Close While Training", $x + 50, $y - 5, -1, -1)
@@ -177,4 +177,45 @@ Local $x = 20, $y = 25
 			;GUICtrlSetState(-1, $GUI_DISABLE)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
+	; Chalicucu & demen: switch CoC Acc GUI
+	Local $x = 20, $y = 293
+	GUICtrlCreateGroup(GetTranslated(636,2, "Switch CoC Accounts"), $x - 20, $y - 20, 440, 90)
+		$chkSwitchAcc = GUICtrlCreateCheckbox("Enable Switch Account", $x - 10, $y - 5, -1, -1)
+			$txtTip = "Switch to another account & profile when camp is less than 85%" & @CRLF & _
+			          "This function supports maximum 8 CoC accounts & 8 Bot profiles" & @CRLF & _
+			          "Make sure to align the accounts with profiles in listing order"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetOnEvent(-1, "chkSwitchAcc")
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
+		$lbTotalCoCAcc = GUICtrlCreateLabel("Total CoC Accounts:", $x + 138, $y - 1, 130, 20)
+		$txtTotalCoCAcc = GUICtrlCreateInput("0", $x + 240, $y - 6, 35, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			GUICtrlSetLimit(-1, 1)
+			$txtTip = "Number of Google Accounts on emulator. Supporting maximum 8 Accounts."
+			GUICtrlSetTip(-1,$txtTip)
+		$lbActiveCoCAcc = GUICtrlCreateLabel("Active Accounts:", $x + 288, $y - 1, 130, 20)
+		$txtActiveCoCAcc = GUICtrlCreateInput("0", $x + 373, $y - 6, 35, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+			GUICtrlSetLimit(-1, 1)
+			$txtTip = "Number of Google Accounts that you set for botting."
+			GUICtrlSetTip(-1,$txtTip)
+		$lbAccBottingOrder = GUICtrlCreateLabel("CoC Accounts Botting order:", $x - 10, $y + 25, 135, 20)
+		$txtAccBottingOrder = GUICtrlCreateInput("12345678", $x + 138, $y + 22, 70, 21,  BitOR($GUI_SS_DEFAULT_INPUT,$SS_LEFT, $ES_AUTOHSCROLL))
+			$txtTip = "Input the desired order of switching CoC Accounts."
+			GUICtrlSetTip(-1,$txtTip)
+		$lbProfileIdxOrder = GUICtrlCreateLabel("BOT Profile Indexs order:", $x + 215, $y + 25, 130, 20)
+		$txtProfileIdxOrder = GUICtrlCreateInput("12345678", $x + 340, $y + 22, 70, 21,  BitOR($GUI_SS_DEFAULT_INPUT,$SS_LEFT, $ES_AUTOHSCROLL))
+			GUICtrlSetLimit(-1, 8)
+			$txtTip = "Input the order of Profiles to align with CoC Accounts order. Supporting maximum 8 Profiles"
+			GUICtrlSetTip(-1,$txtTip)
+		$chkAtkPln = GUICtrlCreateCheckbox("Check attack plan", $x - 10, $y + 45, -1, -1)
+			$txtTip = "Enable/Disable attack plan"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
+			GUICtrlSetOnEvent(-1, "chkAtkPln")
+	    $chkAccRelax = GUICtrlCreateCheckbox("Attack relax together", $x + 120, $y + 45, -1, -1)
+			$txtTip = "If attack is not planned for current profile" & @CRLF & _
+			          "Then bot stop emulator and relax!"
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
+			GUICtrlSetOnEvent(-1, "chkAccRelaxTogether")
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
 ;GUISetState()

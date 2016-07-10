@@ -240,7 +240,6 @@ Func getArmyTroopCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $tes
 
 				EndIf
 				If $TroopQ <> 0 Then SetLog(" - No. of " & $TroopName & ": " & $TroopQ)
-				If $TroopQ <> 0 Then $CampStatus &= " -No. of " & $TroopName & ": " & $TroopQ & "\n" ;Telegram[Surbiks]
 
 			EndIf
 

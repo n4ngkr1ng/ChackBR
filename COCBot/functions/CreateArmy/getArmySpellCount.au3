@@ -52,42 +52,34 @@ Func getArmySpellCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $tes
 			If $FullTemp = "Lightning" Then
 				$CurLightningSpell = $SpellQ
 				Setlog(" - No. of Lightning Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Lightning Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "Heal" Then
 				$CurHealSpell = $SpellQ
 				Setlog(" - No. of Heal Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Heal Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "Rage" Then
 				$CurRageSpell = $SpellQ
 				Setlog(" - No. of Rage Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Rage Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "Jump" Then
 				$CurJumpSpell = $SpellQ
 				Setlog(" - No. of Jump Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Jump Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "Freeze" Then
 				$CurFreezeSpell = $SpellQ
 				Setlog(" - No. of Freeze Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Freeze Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "Poison" Then
 				$CurPoisonSpell = $SpellQ
 				Setlog(" - No. of Poison Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Poison Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "Haste" Then
 				$CurHasteSpell = $SpellQ
 				Setlog(" - No. of Haste Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Haste Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "Earth" Then
 				$CurEarthSpell = $SpellQ
 				Setlog(" - No. of Earthquake Spells: " & $SpellQ)
-				$CampStatus &= " -No. of Earthquake Spells: " & $SpellQ & "\n" ;Telegram[Surbiks]
 			EndIf
 			If $FullTemp = "" And $debugsetlogTrain = 1 Then
 				Setlog(" - was not detected anything in slot: " & $i + 1, $COLOR_PURPLE)

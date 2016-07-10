@@ -421,11 +421,13 @@ Func chkUseTrainingClose()
 			GUICtrlSetState($i, $GUI_SHOW)
 		Next
 		$ichkCloseTraining = 1
+		GUICtrlSetState($chkSwitchAcc, $GUI_DISABLE)
 	Else
 		For $i = $lblExtraTimeMin To $chkRandomStayORClose
 			GUICtrlSetState($i, $GUI_HIDE)
 		Next
 		$ichkCloseTraining = 0
+		GUICtrlSetState($chkSwitchAcc, $GUI_ENABLE)
 	EndIf
 EndFunc   ;==>chkUseTrainingClose
 
@@ -506,3 +508,48 @@ Func sldAttacksMax()
 	GUICtrlSetData($lblAttacksMinUnit, ($rangeAttacksStart = 1) ? "attack" : "attacks")
 	GUICtrlSetData($lblAttacksMaxUnit, ($rangeAttacksEnd = 1) ? "attack" : "attacks")
 EndFunc   ;==>sldAttacksMax
+
+
+; Demen & chalicucu Switch Account
+Func chkSwitchAcc()
+	If GUICtrlRead($chkSwitchAcc) = $GUI_CHECKED Then
+		GUICtrlSetState($chkUseTrainingClose, $GUI_UNCHECKED)
+		GUICtrlSetState($chkUseTrainingClose, $GUI_DISABLE)
+		For $i = $lblExtraTimeMin To $chkRandomStayORClose
+			GUICtrlSetState($i, $GUI_HIDE)
+		Next
+		For $i = $lbTotalCoCAcc To $chkAccRelax
+			GUICtrlSetState($i, $GUI_SHOW)
+		Next
+		$ichkSwitchAcc = 1
+	Else
+		GUICtrlSetState($chkUseTrainingClose, $GUI_ENABLE)
+		GUICtrlSetState($chkUseTrainingClose, $GUI_CHECKED)
+		For $i = $lblExtraTimeMin To $chkRandomStayORClose
+			GUICtrlSetState($i, $GUI_SHOW)
+		Next
+		For $i = $lbTotalCoCAcc To $chkAccRelax
+			GUICtrlSetState($i, $GUI_HIDE)
+		Next
+		$ichkSwitchAcc = 0
+	EndIf
+	IniWrite($profile, "switchcocacc", "Enable", $ichkSwitchAcc)
+EndFunc   ;==>chkSwitchAcc
+
+Func chkAccRelaxTogether()	;chalicucu
+	If GUICtrlRead($chkAccRelax) = $GUI_CHECKED Then
+		$AccRelaxTogether = 1
+	Else
+		$AccRelaxTogether = 0
+	EndIf
+	IniWrite($profile, "switchcocacc", "AttackRelax", $AccRelaxTogether)
+EndFunc   ;==>chkAccRelaxTogether
+
+Func chkAtkPln()	;chalicucu enable/disable attack plan
+	If GUICtrlRead($chkAtkPln) = $GUI_CHECKED Then
+		$iChkAtkPln = 1
+	Else
+		$iChkAtkPln = 0
+	EndIf
+	IniWrite($profile, "switchcocacc", "CheckAtkPln", $iChkAtkPln)
+EndFunc   ;==>chkAtkPln

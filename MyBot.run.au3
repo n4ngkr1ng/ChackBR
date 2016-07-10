@@ -67,7 +67,7 @@ Local $sModversion
 ; "1206" ; CSV Deploy Speed Mod - @MikeCoC
 ; "1207" ; Allow BOT cpu priority only for single process
 ; "1208" ; Attack Now Button ( Attack Plan, Search & Attack, Active Base, Attack )
-; "1209" ; Add 8F CSV Attack Files From AsesomeGamer 
+; "1209" ; Add 8F CSV Attack Files From AsesomeGamer
 ; "1210" ; Updates for "CSV Fast Deployment Fusion" ( Speed Up FF )
 ; "1211" ; Updates for CSV Attack Files ( Force All Troops Deploy )
 ; "1212" ; Fix for King activated on deploy
@@ -82,11 +82,9 @@ Local $sModversion
 ; "1221" ; SplashScreen: Add Option to Disable It
 ; "1301" ; Upgrade to MyBot v6.1.3
 ; "1401" ; Upgrade to MyBot v6.1.4
-; "1402" ; Update Logo, Train Big First
-; "1403" ; Telegram
-$sModversion = "1404" ; Remove Pre-Train spells
-$sBotVersion = "b6.1.4" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
-$sBotTitle = "My Bot " & $sBotVersion & ".r" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
+$sModversion = "1.4.1" ; Update Logo, Train Big First
+$sBotVersion = "v6.1.4" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it it also use on Checkversion()
+$sBotTitle = "My Bot " & $sBotVersion & " Mod-v" & $sModversion & " " ;~ Don't use any non file name supported characters like \ / : * ? " < > |
 
 Global $sBotTitleDefault = $sBotTitle
 
@@ -211,6 +209,9 @@ SetDebugLog("MyBot.run launch time " & Round($iBotLaunchTime) & " ms.")
 ;~ Restore process priority
 ProcessSetPriority(@AutoItPID, $iBotProcessPriority)
 
+InitOrder()			;chalicucu init SwitchCOCAcc
+ResetTrainTimer()	;demen reset training time
+
 ;AutoStart Bot if request
 AutoStart()
 
@@ -230,25 +231,40 @@ BotClose()
 Func runBot() ;Bot that runs everything in order
 	$TotalTrainedTroops = 0
 	Local $Quickattack = False
+	If $ichkSwitchAcc = 1 Then
+		RequestCC()			;Chalicucu
+		SwitchCOCAcc(True)	;Chalicucu, first match acc and profile
+	EndIf
 	Local $LeaveOrClose = 0
 	While 1
 		$Restart = False
 		$fullArmy = False
 		$CommandStop = -1
-			
-		; each loop ( after each attack ) will determinate if close while train or not 
-		If $RandomCloseTraining = 1 then 
+
+		; each loop ( after each attack ) will determinate if close while train or not
+		If $RandomCloseTraining = 1 then
 			if $debugSetlog = 1 then Setlog("You chose the Random Close Or Leave train...", $COLOR_RED)
 			$RandomCloseTraining2 = Random(0,1,1)
-			If $RandomCloseTraining2 = 1 then $LeaveOrClose +=1 
-			If $LeaveOrClose = 3 then 
+			If $RandomCloseTraining2 = 1 then $LeaveOrClose +=1
+			If $LeaveOrClose = 3 then
 				$RandomCloseTraining2 = 0
-				$LeaveOrClose = 0 
-			EndIf 
+				$LeaveOrClose = 0
+			EndIf
 			if $debugSetlog = 1 then Setlog("$RandomCloseTraining2: " & $RandomCloseTraining2)
 		EndIf
-			
+
 		If _Sleep($iDelayRunBot1) Then Return
+		If GotoAttack() = False Then    ;Chalicucu not start emulator. relax
+            		If $ichkSwitchAcc=1 And $AccRelaxTogether = 1 Then
+				CloseAndroid()
+				SetLog("Relax! Attack not planned...",$COLOR_RED)
+				If _Sleep(600000) Then Return
+				ContinueLoop
+			ElseIf $ichkSwitchAcc = 1 Then
+				SwitchCOCAcc()
+				If _Sleep(20000) Then Return
+			EndIf
+        	EndIf
 		checkMainScreen()
 		If $Restart = True Then ContinueLoop
 		chkShieldStatus()
@@ -266,7 +282,7 @@ Func runBot() ;Bot that runs everything in order
 			If _Sleep($iDelayRunBot2) Then Return
 			checkMainScreen(False)
 			If $Restart = True Then ContinueLoop
-			If ($RequestScreenshot = 1 Or $TelegramRequestScreenshot = 1) Then PushMsg("RequestScreenshot") ;Telegram[Surbiks]
+			If $RequestScreenshot = 1 Then PushMsg("RequestScreenshot")
 			If _Sleep($iDelayRunBot3) Then Return
 			VillageReport()
 			If $OutOfGold = 1 And (Number($iGoldCurrent) >= Number($itxtRestartGold)) Then ; check if enough gold to begin searching again
@@ -349,7 +365,11 @@ Func runBot() ;Bot that runs everything in order
 			   UpgradeWall()
 			   If _Sleep($iDelayRunBot3) Then Return
 			   If $Restart = True Then ContinueLoop
-			   Idle()
+			   ;Chalicucu change Idle()
+			   If Idle()= 1 Then
+				$Quickattack = False
+				ContinueLoop
+			   EndIf
 			   ;$fullArmy1 = $fullArmy
 			   If _Sleep($iDelayRunBot3) Then Return
 			   If $Restart = True Then ContinueLoop
@@ -403,12 +423,33 @@ EndFunc   ;==>runBot
 Func Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
 	;If $debugsetlog = 1 Then SetLog("Func Idle ", $COLOR_PURPLE)
-	While $fullArmy = False Or $bFullArmyHero = False
+	While $fullArmy = False Or $bFullArmyHero = False Or $CommandStop = 0       ;Chalicucu add CommandStop
 		checkAndroidTimeLag()
 
-		If ($RequestScreenshot = 1 Or $TelegramRequestScreenshot = 1) Then PushMsg("RequestScreenshot") ;Telegram[Surbiks]
+		If $RequestScreenshot = 1 Then PushMsg("RequestScreenshot")
 		If _Sleep($iDelayIdle1) Then Return
-		If $CommandStop = -1 Then SetLog("====== Waiting for full army ======", $COLOR_GREEN)
+		If $CommandStop = -1 Or ($ichkSwitchAcc=1 And $CommandStop = 0) Then 	;Chalicucu
+            		SetLog("====== Waiting for full army ======", $COLOR_GREEN)
+            		If $ichkSwitchAcc =1 And ((($CurCamp/$TotalCamp)*100) < 85 Or $CommandStop = 0) Then    ;Chalicucu
+                		RequestCC()
+				SetLog("====== Switching COC account ======", $COLOR_GREEN)
+				SwitchCOCAcc()      ;Chalicucu switch COC acc
+				BotCommand()
+				_RunFunction("DonateCC,Train")
+                		If $CommandStop <> 0 And ($CurCamp/$TotalCamp)*100 < 96 Then		;new village camp
+                    			CloseCOC()
+                    			SetLog("====== Sleeping 2 minutes ======", $COLOR_GREEN)
+                    			If _Sleep(120000) Then Return
+                    				OpenCOC()
+                			Else
+                    				If _Sleep(2000) Then Return
+                			EndIf
+				Return	1
+            		Else
+                		If _Sleep(30000) Then Return
+            		EndIf
+        	EndIf
+
 		Local $hTimer = TimerInit()
 		Local $iReHere = 0
 
@@ -540,6 +581,7 @@ Func AttackMain() ;Main control for attack functions
 		Else
 			Setlog("No one of search condition match: (wait troops and/or heroes according to search settings)", $COLOR_BLUE)
 			Setlog(" - wait troops and/or heroes according to search settings", $COLOR_BLUE)
+			BotCommand()			;Chalicucu
 		EndIf
 	Else
 		SetLog("Attacking Not Planned, Skipped..", $COLOR_RED)
@@ -549,7 +591,7 @@ EndFunc   ;==>AttackMain
 Func Attack() ;Selects which algorithm
 	Local $bADBTemp = $AndroidAdbClicksEnabled
 	If ( $Android = "BlueStacks" ) Or ( $Android = "BlueStacks2" ) Then
-		If $AndroidAdbClicksEnabled Then 
+		If $AndroidAdbClicksEnabled Then
 			$AndroidAdbClicksEnabled = False
 	   	SetLog( $Android & ": FastClicks Disabled (Unsuported)", $COLOR_GREEN)
 		EndIf

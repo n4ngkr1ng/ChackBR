@@ -115,6 +115,8 @@
 #include "functions\CreateArmy\Train.au3"
 #include "functions\CreateArmy\TrainIt.au3"
 
+#include "functions\CreateArmy\GetRemainTimeTrainning.au3"
+#include "functions\CreateArmy\MinRemainTrainAcc.au3"
 
 #include "functions\Image Search\ImageSearch.au3"
 #include "functions\Image Search\checkDeadBase.au3"
@@ -256,5 +258,7 @@
 ; MOD files
 ;
 
-; AwesomeGamer, LunaEclipse, MikeCoC, Promac, Telegram, ...
+; AwesomeGamer, LunaEclipse, MikeCoC, Promac, ...
 #include "functions\MOD\Include_Files.au3"
+
+#include "functions\Village\SwitchCOCAcc.au3"		; Chalicucu Switch COC account

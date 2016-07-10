@@ -243,7 +243,7 @@ Func Train()
 		$BarrackDarkStatus[0] = False
 		$BarrackDarkStatus[1] = False
 		SetLog("Your Army Camps are now Full", $COLOR_RED)
-		PushMsg("CampFull") ;Telegram[Surbiks]
+		If ($PushBulletEnabled = 1 And $ichkAlertPBCampFull = 1) Then PushMsg("CampFull")
 	EndIf
 
 	;If is fullArmy or FirstStart or we are using the Barracks modes is not necessary count the donations , the $Cur will add the correct troops to make
@@ -885,6 +885,7 @@ Func Train()
 					EndIf
 					If $debugsetlogTrain = 1 And $icount = 100 Then SetLog("Train warning 6", $COLOR_PURPLE)
 				EndIf
+
 				If _Sleep($iDelayTrain2) Then ExitLoop
 				If Not (IsTrainPage()) Then Return ; exit from train if no train page
 				Switch $darkbarrackTroop[$brrDarkNum - 1]

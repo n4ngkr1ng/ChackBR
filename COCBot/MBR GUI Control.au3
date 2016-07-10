@@ -231,6 +231,22 @@ Func GUIControl($hWind, $iMsg, $wParam, $lParam)
 					btnTestDonateCC()
 				Case $btnTestAttackBar
 					btnTestAttackBar()
+				Case $txtTotalCoCAcc			;chalicucu
+					Switch $nNotifyCode
+						Case $EN_KILLFOCUS
+							SetLog("[Total account config]")
+							ReCfgTotalAcc(Int(GUICtrlRead($txtTotalCoCAcc)))
+					EndSwitch
+				Case $txtAccBottingOrder		;chalicucu: reorder switch acc
+					If $nNotifyCode = $EN_KILLFOCUS Then 
+						SetLog("[Account order config]")
+						ReorderAcc(GUICtrlRead($txtAccBottingOrder), True)
+					EndIf
+				Case $txtProfileIdxOrder		;chalicucu: reorder profile for acc
+					If $nNotifyCode = $EN_KILLFOCUS Then 
+						SetLog("[Profile config]")
+						ReorderAllPro(GUICtrlRead($txtProfileIdxOrder), True)
+					EndIf
 			EndSwitch
 		Case $WM_SYSCOMMAND ; 274
 			If $__TEST_ERROR = True Then SetDebugLog("Bot WM_SYSCOMMAND: " & Hex($wParam, 4))
@@ -873,9 +889,7 @@ Func Bind_ImageList($nCtrl)
 
 		Case $hGUI_NOTIFY_TAB
 			; the icons for NOTIFY tab
-			;Telegram[Surbiks]
-			Local $aIconIndex[3] = [$eIcnPushBullet, $eIcnTelegram, $eIcnOptions]
-			;Telegram
+			Local $aIconIndex[2] = [$eIcnPushBullet, $eIcnOptions]
 
 		Case $hGUI_ATTACK_TAB
 			; the icons for attack tab

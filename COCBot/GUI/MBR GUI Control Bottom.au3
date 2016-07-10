@@ -137,6 +137,7 @@ EndFunc   ;==>IsStopped
 
 Func btnStart()
 	ResumeAndroid()
+	AccStartInit()		;Chalicucu init COC Account environment
 	If $RunState = False Then
 		;GUICtrlSetState($chkBackground, $GUI_DISABLE) ; will be disbaled after check if Android supports Background Mode
 		GUICtrlSetState($btnStart, $GUI_HIDE)
@@ -223,11 +224,17 @@ Func btnStart()
 				WinActivate($activeHWnD) ; restore current active window
 			EndIf
 			If Not $RunState Then Return
+				AccStartInit()		;Chalicucu init COC Account environment
 			If IsArray(ControlGetPos($HWnD, $AppPaneName, $AppClassInstance)) And $hWndActive = $HWnD  Then ; Really?
 				Initiate() ; Initiate and run bot
 			Else
 				SetLog("Cannot use " & $Android & ", please check log", $COLOR_RED)
 				btnStop()
+				;Chalicucu retry
+				RebootAndroid(False)
+				If _Sleep(1000) Then Return
+				btnStop()
+				btnStart()
 			EndIf
 		Else
 			SetLog("Cannot start " & $Android & ", please check log", $COLOR_RED)

@@ -90,7 +90,6 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 	$found = _ImageSearchArea(@ScriptDir & "\images\HeroesArmy\king.bmp", 1, $capture_x, $capture_y, $capture_x + $capture_width, $capture_y + $capture_height, $xpos, $ypos, $tolerance)
 	If $found = 1 Then
 		Setlog(" - Barbarian King available", $color_blue)
-		$CampStatus &= " -Barbarian King available" & "\n" ;Telegram[Surbiks]
 		If $debugArmyHeroCount = 1 Then Setlog("- detected in position (" & $xpos & "+" & $capture_x & "," & $ypos & "+" & $capture_y & ")")
 		$iHeroAvailable = BitOR($iHeroAvailable, $HERO_KING)
 	Else
@@ -103,7 +102,6 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 	$found = _ImageSearchArea(@ScriptDir & "\images\HeroesArmy\queen.bmp", 1, $capture_x, $capture_y, $capture_x + $capture_width, $capture_y + $capture_height, $xpos, $ypos, $tolerance)
 	If $found = 1 Then
 		Setlog(" - Archer Queen available", $color_blue)
-		$CampStatus &= " -Archer Queen available" & "\n" ;Telegram[Surbiks]
 		If $debugArmyHeroCount = 1 Then Setlog("- detected in position (" & $xpos & "+" & $capture_x & "," & $ypos & "+" & $capture_y & ")")
 		$iHeroAvailable = BitOR($iHeroAvailable, $HERO_QUEEN)
 	Else
@@ -112,7 +110,6 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 		$found = _ImageSearchArea(@ScriptDir & "\images\HeroesArmy\queen2.bmp", 1, $capture_x, $capture_y, $capture_x + $capture_width, $capture_y + $capture_height, $xpos, $ypos, $tolerance)
 		If $found = 1 Then
 			Setlog(" - Archer Queen available.", $color_blue)
-			$CampStatus &= " -Archer Queen available" & "\n" ;Telegram[Surbiks]
 			If $debugArmyHeroCount = 1 Then Setlog("- detected in position (" & $xpos & "+" & $capture_x & "," & $ypos & "+" & $capture_y & ")")
 			$iHeroAvailable = BitOR($iHeroAvailable, $HERO_QUEEN)
 		Else
@@ -127,7 +124,6 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 	$found = _ImageSearchArea(@ScriptDir & "\images\HeroesArmy\warden.bmp", 1, $capture_x, $capture_y, $capture_x + $capture_width, $capture_y + $capture_height, $xpos, $ypos, $tolerance)
 	If $found = 1 Then
 		Setlog(" - Grand Warden available", $color_blue)
-		$CampStatus &= " -Grand Warden available" & "\n" ;Telegram[Surbiks]
 		If $debugArmyHeroCount = 1 Then Setlog("- detected in position (" & $xpos & "+" & $capture_x & "," & $ypos & "+" & $capture_y & ")")
 		$iHeroAvailable = BitOR($iHeroAvailable, $HERO_WARDEN)
 	Else
@@ -136,7 +132,6 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 		$found = _ImageSearchArea(@ScriptDir & "\images\HeroesArmy\warden2.bmp", 1, $capture_x, $capture_y, $capture_x + $capture_width, $capture_y + $capture_height, $xpos, $ypos, $tolerance)
 		If $found = 1 Then
 			Setlog(" - Grand Warden available.", $color_blue)
-			$CampStatus &= " -Grand Warden available" & "\n" ;Telegram[Surbiks]
 			If $debugArmyHeroCount = 1 Then Setlog("- detected in position (" & $xpos & "+" & $capture_x & "," & $ypos & "+" & $capture_y & ")")
 			$iHeroAvailable = BitOR($iHeroAvailable, $HERO_WARDEN)
 		Else

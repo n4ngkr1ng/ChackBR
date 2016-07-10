@@ -226,36 +226,3 @@ Global $dailyAttacks = 0, $dailyAttackLimit = 0
 ; Randomization of functions
 Global $RandomTimer = True
 Global $sTimerRandomHalt
-
-;
-;Telegram[Surbiks]
-;
-Global $TelegramUrl = "https://api.telegram.org/bot"
-Global $TelegramToken = ""
-Global $TRemoteControlInterval = 40000;60000 ; 40 secs
-Global $TDeleteOldPushesInterval = 1800000 ; 30 mins
-Global $iOrigTelegram
-Global $iLastAttackT
-Global $iAlertTVillage
-Global $TelegramEnabled
-Global $iAlertTLastRaidTxt
-Global $iDeleteAllTPushes = 0
-Global $iDeleteAllTPushesNow = False
-Global $ichkDeleteOldTPushes
-Global $icmbHoursTelegram
-Global $chkDeleteAllTPushes
-Global $ichkAlertTCampFull
-Global $ichkAlertTCampFullTest = 0
-Global $pRemoteTelegram
-Global $pMatchFoundTelegram
-Global $pLastRaidImgTelegram
-Global $pWallUpgradeTelegram
-Global $pOOSTelegram
-Global $pAnotherDeviceTelegram
-Global $pTakeAbreakTelegram
-Global $CampStatus = ""
-Global $TelegramFirst = 0
-Global $TelegramChatIDs
-Global $TelegramLastRemoteID = 0
-Global $TelegramRequestScreenshot = 0
-Global $TelegramRequestScreenshotIDs
