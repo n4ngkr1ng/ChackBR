@@ -277,6 +277,99 @@ Func saveConfig() ;Saves the controls settings to the config
 
 
 	; save notify GUI -> variables -----------------------------------------------
+		;Telegram[Surbiks]
+	If GUICtrlRead($chkTEnabled) = $GUI_CHECKED Then
+		$TelegramEnabled = 1
+	Else
+		$TelegramEnabled = 0
+	EndIf
+
+	If GUICtrlRead($chkTRemote) = $GUI_CHECKED Then
+		$pRemoteTelegram = 1
+	Else
+		$pRemoteTelegram = 0
+	EndIf
+
+	If GUICtrlRead($chkDeleteAllTPushes) = $GUI_CHECKED Then
+		$iDeleteAllTPushes = 1
+	Else
+		$iDeleteAllTPushes = 0
+	EndIf
+
+	If GUICtrlRead($chkDeleteOldTPushes) = $GUI_CHECKED Then
+		$ichkDeleteOldTPushes = 1
+	Else
+		$ichkDeleteOldTPushes = 0
+	EndIf
+
+	$icmbHoursTelegram = _GUICtrlComboBox_GetCurSel($cmbHoursTelegram)
+
+	If GUICtrlRead($chkAlertTVMFound) = $GUI_CHECKED Then
+		$pMatchFoundTelegram = 1
+	Else
+		$pMatchFoundTelegram = 0
+	EndIf
+
+	If GUICtrlRead($chkAlertTLastRaid) = $GUI_CHECKED Then
+		$pLastRaidImgTelegram = 1
+	Else
+		$pLastRaidImgTelegram = 0
+	EndIf
+
+
+	If GUICtrlRead($chkAlertTWallUpgrade) = $GUI_CHECKED Then
+		$pWallUpgradeTelegram = 1
+	Else
+		$pWallUpgradeTelegram = 0
+	EndIf
+
+	If GUICtrlRead($chkAlertTOOS) = $GUI_CHECKED Then
+		$pOOSTelegram = 1
+	Else
+		$pOOSTelegram = 0
+	EndIf
+
+	If GUICtrlRead($chkAlertTOtherDevice) = $GUI_CHECKED Then
+		$pAnotherDeviceTelegram = 1
+	Else
+		$pAnotherDeviceTelegram = 0
+	EndIf
+
+	$TelegramToken = GUICtrlRead($TelegramTokenValue)
+	$iOrigTelegram = GUICtrlRead($OrigTelegram)
+
+
+	If GUICtrlRead($chkAlertTLastRaidTxt) = $GUI_CHECKED Then
+		$iAlertTLastRaidTxt = 1
+	Else
+		$iAlertTLastRaidTxt = 0
+	EndIf
+
+	If GUICtrlRead($chkAlertTLastAttack) = $GUI_CHECKED Then
+		$iLastAttackT = 1
+	Else
+		$iLastAttackT = 0
+	EndIf
+
+	If GUICtrlRead($chkAlertTCampFull) = $GUI_CHECKED Then
+		$ichkAlertTCampFull = 1
+	Else
+		$ichkAlertTCampFull = 0
+	EndIf
+
+	If GUICtrlRead($chkAlertTVillage) = $GUI_CHECKED Then
+		$iAlertTVillage = 1
+	Else
+		$iAlertTVillage = 0
+	EndIf
+
+	If GUICtrlRead($chkAlertTVBreak) = $GUI_CHECKED Then
+		$pTakeAbreakTelegram = 1
+	Else
+		$pTakeAbreakTelegram = 0
+	EndIf
+	;Telegram
+
 	;PushBullet
 	If GUICtrlRead($chkPBenabled) = $GUI_CHECKED Then
 		$PushBulletEnabled = 1

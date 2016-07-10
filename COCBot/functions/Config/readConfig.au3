@@ -582,9 +582,6 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 		;======================================================================================================================
 
 		;Misc Settings--------------------------------------------------------------------------
-
-
-
 		IniReadS($ichkTrap, $config, "other", "chkTrap", "1")
 		IniReadS($iChkCollect, $config, "other", "chkCollect", "1")
 		IniReadS($ichkTombstones, $config, "other", "chkTombstones", "1")
@@ -598,6 +595,31 @@ Func readConfig($inputfile = $config, $partial = False) ;Reads config and sets i
 
 		IniReadS($iWAOffsetX, $config, "other", "WAOffsetX", "0")
 		IniReadS($iWAOffsetY, $config, "other", "WAOffsetY", "0")
+
+		;Telegram[Surbiks]
+		IniReadS($TelegramToken, $config, "telegram", "AccountToken", "")
+		IniReadS($iOrigTelegram, $config, "telegram", "OrigTelegram", $sCurrProfile)
+
+		IniReadS($iAlertTVillage, $config, "telegram", "AlertTelegramVillage", "0")
+		IniReadS($iLastAttackT, $config, "telegram", "AlertTelegramLastAttack", "0")
+		IniReadS($iAlertTLastRaidTxt, $config, "telegram", "AlertTelegramLastRaidTxt", "0")
+
+		IniReadS($TelegramEnabled, $config, "telegram", "TelegramEnabled", "0")
+		IniReadS($pRemoteTelegram, $config, "telegram", "TelegramRemote", "0")
+		IniReadS($iDeleteAllTPushes, $config, "telegram", "DeleteAllTelegramPushes", "0")
+		IniReadS($pMatchFoundTelegram, $config, "telegram", "AlertTelegramVMFound", "0")
+		IniReadS($pLastRaidImgTelegram, $config, "telegram", "AlertTelegramLastRaid", "0")
+		IniReadS($pWallUpgradeTelegram, $config, "telegram", "AlertTelegramWallUpgrade", "0")
+		IniReadS($pOOSTelegram, $config, "telegram", "AlertTelegramOOS", "0")
+		IniReadS($pTakeAbreakTelegram, $config, "telegram", "AlertTelegramVBreak", "0")
+		IniReadS($pAnotherDeviceTelegram, $config, "telegram", "AlertTelegramOtherDevice", "0")
+		IniReadS($icmbHoursTelegram, $config, "telegram", "HoursTelegram", "4")
+		IniReadS($ichkDeleteOldTPushes, $config, "telegram", "DeleteOldTelegramPushes", "0")
+		IniReadS($ichkAlertTCampFull, $config, "telegram", "AlertTelegramCampFull", "0")
+
+		$TelegramChatIDs = StringSplit(IniRead($config, "telegram", "TelegramChatIDs", "0"), "|", 2)
+		IniReadS($TelegramLastRemoteID, $config, "telegram", "TelegramLastRemoteID", "0")
+		;Telegram
 
 		;PushBullet Settings ---------------------------------------------
 		IniReadS($PushBulletToken, $config, "pushbullet", "AccountToken", "")

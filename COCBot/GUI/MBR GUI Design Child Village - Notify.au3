@@ -107,6 +107,102 @@ $hGUI_NOTIFY_TAB_ITEM2 = GUICtrlCreateTabItem(GetTranslated(600,18,"PushBullet")
 			GUICtrlSetState(-1, $GUI_DISABLE)
 		GUICtrlCreateGroup("", -99, -99, 1, 1)
 GUICtrlCreateTabItem("")
+
+;Telegram[Surbiks]
+$hGUI_NOTIFY_TAB_ITEM1 = GUICtrlCreateTabItem("Telegram")
+	Global $grpTelegram, $chkTEnabled,$chkTRemote,$chkDeleteAllTPushes,$btnDeleteTMessages,$chkDeleteOldTPushes,$cmbHoursTelegram
+	Global $TelegramTokenValue, $OrigTelegram, $chkAlertTVMFound, $chkAlertTLastRaid, $chkAlertTLastRaidTxt, $chkAlertTCampFull
+	Global $chkAlertTWallUpgrade, $chkAlertTOOS, $chkAlertTVBreak, $chkAlertTVillage, $chkAlertTLastAttack
+	Global $chkAlertTOtherDevice
+
+	Local $x = 25, $y = 45
+		$grpTelegram = GUICtrlCreateGroup("Telegram Alert", $x - 20, $y - 20, 430, 334)
+		$x -= 10
+		$picTelegram = GUICtrlCreateIcon ($pIconLib, $eIcnTelegram, $x + 3, $y, 32, 32)
+		$chkTEnabled = GUICtrlCreateCheckbox("Enable", $x + 40, $y)
+			GUICtrlSetOnEvent(-1, "chkTEnabled")
+			GUICtrlSetTip(-1, "Enable Telegram notifications")
+		$y += 22
+		$chkTRemote = GUICtrlCreateCheckbox("Remote Control", $x + 40, $y)
+			GUICtrlSetTip(-1, "Enables Telegram Remote function")
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$y = 45
+		$chkDeleteAllTPushes = GUICtrlCreateCheckbox("Delete Msg on Start", $x + 160, $y)
+			GUICtrlSetTip(-1, "It will delete all previous push notification when you start bot")
+			GUICtrlSetState(-1, $GUI_DISABLE)
+			GUICtrlSetState(-1, $GUI_HIDE)
+		$btnDeleteTMessages = GUICtrlCreateButton("Delete all Msg now", $x + 300, $y, 100, 20)
+			GUICtrlSetTip(-1, "Click here to delete all Telegram messages.")
+			GUICtrlSetOnEvent(-1, "btnDeleteTMessages")
+			IF $btnColor then GUICtrlSetBkColor(-1, 0x5CAD85)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+			GUICtrlSetState(-1, $GUI_HIDE)
+		$y += 22
+		$chkDeleteOldTPushes = GUICtrlCreateCheckbox("Delete Msg older than", $x + 160, $y)
+			GUICtrlSetTip(-1, "Delete all previous push notification older than specified hour")
+			GUICtrlSetState(-1, $GUI_DISABLE)
+			GUICtrlSetState(-1, $GUI_HIDE)
+			GUICtrlSetOnEvent(-1, "chkDeleteOldTPushes")
+		$cmbHoursTelegram = GUICtrlCreateCombo("", $x + 300, $y, 100, 35, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+			GUICtrlSetTip(-1, "Set the interval for messages to be deleted.")
+			$sTxtHours = GetTranslated(603,14, "Hours")
+			GUICtrlSetData(-1, "1 " & GetTranslated(603,15, "Hour") &"|2 " & $sTxtHours & "|3 " & $sTxtHours & "|4 " & $sTxtHours & "|5 " & $sTxtHours & "|6 " & $sTxtHours & "|7 " & $sTxtHours & "|8 " &$sTxtHours & "|9 " & $sTxtHours & "|10 " & $sTxtHours & "|11 " & $sTxtHours & "|12 " & $sTxtHours & "|13 " & $sTxtHours & "|14 " & $sTxtHours & "|15 " & $sTxtHours & "|16 " & $sTxtHours & "|17 " & $sTxtHours & "|18 " & $sTxtHours & "|19 " & $sTxtHours & "|20 " & $sTxtHours & "|21 " & $sTxtHours & "|22 " & $sTxtHours & "|23 " & $sTxtHours & "|24 " & $sTxtHours )
+			_GUICtrlComboBox_SetCurSel(-1,0)
+			GUICtrlSetState (-1, $GUI_DISABLE)
+			GUICtrlSetState(-1, $GUI_HIDE)
+		$y += 30
+		$lblTelegramTokenValue = GUICtrlCreateLabel(GetTranslated(619,14, "Access Token") & ":", $x, $y, -1, -1, $SS_RIGHT)
+		$TelegramTokenValue = GUICtrlCreateInput("", $x + 120, $y - 3, 280, 19)
+			GUICtrlSetTip(-1, GetTranslated(619,15, "You need a Token to use Telegram notifications. Get a token from Telegram.org"))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$y += 25
+		$lblOrigTelegram = GUICtrlCreateLabel(GetTranslated(619,16, "Origin") & ":", $x, $y, -1, -1, $SS_RIGHT)
+			$txtTip = GetTranslated(619,17, "Origin - Village name.")
+			GUICtrlSetTip(-1, $txtTip)
+		$OrigTelegram = GUICtrlCreateInput("", $x + 120, $y - 3, 280, 19)
+			GUICtrlSetTip(-1, $txtTip)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$y += 25
+		$lblNotifyTWhen = GUICtrlCreateLabel("Send a Telegram message for these options : ", $x, $y, -1, -1, $SS_RIGHT)
+		$y += 15
+		$chkAlertTVMFound = GUICtrlCreateCheckbox(GetTranslated(619,19, "Match Found"), $x + 10, $y)
+			GUICtrlSetTip(-1, GetTranslated(619,20, "Send the amount of available loot when bot finds a village to attack."))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$chkAlertTLastRaid = GUICtrlCreateCheckbox(GetTranslated(619,21, "Last raid as image"), $x + 110, $y)
+			GUICtrlSetTip(-1, GetTranslated(619,22, "Send the last raid screenshot."))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$chkAlertTLastRaidTxt = GUICtrlCreateCheckbox(GetTranslated(619,23, "Last raid as Text"), $x + 220, $y, -1, -1)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+			GUICtrlSetTip(-1, GetTranslated(619,24, "Send the last raid results as text."))
+		$y += 20
+		$chkAlertTWallUpgrade = GUICtrlCreateCheckbox(GetTranslated(619,27, "Wall upgrade"), $x + 10, $y, -1, -1)
+			 GUICtrlSetTip(-1, GetTranslated(619,28, "Send info about wall upgrades."))
+			 GUICtrlSetState(-1, $GUI_DISABLE)
+		$chkAlertTOOS = GUICtrlCreateCheckbox(GetTranslated(619,29, "Error: Out Of Sync"), $x + 110, $y, -1, -1)
+			GUICtrlSetTip(-1, GetTranslated(619,30, "Send an Alert when you get the Error: Client and Server out of sync"))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$chkAlertTVBreak = GUICtrlCreateCheckbox(GetTranslated(619,31, "Take a break"), $x + 220, $y, -1, -1)
+			GUICtrlSetTip(-1, GetTranslated(619,32, "Send an Alert when you have been playing for too long and your villagers need to rest."))
+		GUICtrlSetState(-1, $GUI_DISABLE)
+		$y += 20
+		$chkAlertTVillage = GUICtrlCreateCheckbox(GetTranslated(619,33, "Village Report"), $x + 10, $y, -1, -1)
+			GUICtrlSetTip(-1, GetTranslated(619,34, "Send a Village Report."))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$chkAlertTLastAttack = GUICtrlCreateCheckbox(GetTranslated(619,35, "Alert Last Attack"), $x + 110, $y, -1, -1)
+			GUICtrlSetTip(-1, GetTranslated(619,36, "Send info about the Last Attack."))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$chkAlertTOtherDevice = GUICtrlCreateCheckbox(GetTranslated(619,37, "Another device connected"), $x + 220, $y, -1, -1)
+			GUICtrlSetTip(-1, GetTranslated(619,38, "Send an Alert when your village is connected to from another device."))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		$y += 20
+		$chkAlertTCampFull = GUICtrlCreateCheckbox(GetTranslated(619,25, "Army Camp Full"), $x + 10, $y, -1, -1)
+			GUICtrlSetTip(-1, GetTranslated(619,26, "Sent an Alert when your Army Camp is full."))
+			GUICtrlSetState(-1, $GUI_DISABLE)
+		GUICtrlCreateGroup("", -99, -99, 1, 1)
+GUICtrlCreateTabItem("")
+;Telegram
+
+;Instructions
 $hGUI_NOTIFY_TAB_ITEM4 = GUICtrlCreateTabItem(GetTranslated(600,19,"Instructions"))
 	Local $x = 25, $y = 45
 		$lblgrppushbullet = GUICtrlCreateGroup(GetTranslated(620,0, "Remote Control Functions"), $x - 20, $y - 20, 430, 334)

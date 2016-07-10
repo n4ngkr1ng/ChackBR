@@ -1428,6 +1428,104 @@ EndIf
 	GUICtrlSetState($chkCheckDeleteConf, $GUI_HIDE)
 	;------------------------------------------------------------------------------------
 
+	;Telegram[Surbik]
+	If $TelegramEnabled = 1 Then
+		GUICtrlSetState($chkTEnabled, $GUI_CHECKED)
+		chkTEnabled()
+	ElseIf $TelegramEnabled = 0 Then
+		GUICtrlSetState($chkTEnabled, $GUI_UNCHECKED)
+		chkTEnabled()
+	EndIf
+
+	If $pRemoteTelegram = 1 Then
+		GUICtrlSetState($chkTRemote, $GUI_CHECKED)
+	ElseIf $pRemoteTelegram = 0 Then
+		GUICtrlSetState($chkTRemote, $GUI_UNCHECKED)
+	EndIf
+
+	If $iDeleteAllTPushes = 1 Then
+		GUICtrlSetState($chkDeleteAllTPushes, $GUI_CHECKED)
+	ElseIf $iDeleteAllTPushes = 0 Then
+		GUICtrlSetState($chkDeleteAllTPushes, $GUI_UNCHECKED)
+	EndIf
+
+	If $ichkDeleteOldTPushes = 1 Then
+		GUICtrlSetState($chkDeleteOldTPushes, $GUI_CHECKED)
+	ElseIf $ichkDeleteOldTPushes = 0 Then
+		GUICtrlSetState($chkDeleteOldTPushes, $GUI_UNCHECKED)
+	EndIf
+
+	_GUICtrlComboBox_SetCurSel($cmbHoursTelegram, $icmbHoursTelegram)
+
+	If $pMatchFoundTelegram = 1 Then
+		GUICtrlSetState($chkAlertTVMFound, $GUI_CHECKED)
+	ElseIf $pMatchFoundTelegram = 0 Then
+		GUICtrlSetState($chkAlertTVMFound, $GUI_UNCHECKED)
+	EndIf
+
+	If $pLastRaidImgTelegram = 1 Then
+		GUICtrlSetState($chkAlertTLastRaid, $GUI_CHECKED)
+	ElseIf $pLastRaidImgTelegram = 0 Then
+		GUICtrlSetState($chkAlertTLastRaid, $GUI_UNCHECKED)
+	EndIf
+
+	If $pWallUpgradeTelegram = 1 Then
+		GUICtrlSetState($chkAlertTWallUpgrade, $GUI_CHECKED)
+	ElseIf $pWallUpgradeTelegram = 0 Then
+		GUICtrlSetState($chkAlertTWallUpgrade, $GUI_UNCHECKED)
+	EndIf
+
+	If $pOOSTelegram = 1 Then
+		GUICtrlSetState($chkAlertTOOS, $GUI_CHECKED)
+	ElseIf $pOOSTelegram = 0 Then
+		GUICtrlSetState($chkAlertTOOS, $GUI_UNCHECKED)
+	EndIf
+
+	If $pTakeAbreakTelegram = 1 Then
+		GUICtrlSetState($chkAlertTVBreak, $GUI_CHECKED)
+	ElseIf $pTakeAbreakTelegram = 0 Then
+		GUICtrlSetState($chkAlertTVBreak, $GUI_UNCHECKED)
+	EndIf
+
+	If $pAnotherDeviceTelegram = 1 Then
+		GUICtrlSetState($chkAlertTOtherDevice, $GUI_CHECKED)
+	ElseIf $pAnotherDeviceTelegram = 0 Then
+		GUICtrlSetState($chkAlertTOtherDevice, $GUI_UNCHECKED)
+	EndIf
+
+	If $ichkDeleteOldTPushes = 1 Then
+		GUICtrlSetState($chkDeleteOldTPushes, $GUI_CHECKED)
+	Else
+		GUICtrlSetState($chkDeleteOldTPushes, $GUI_UNCHECKED)
+	EndIf
+	chkDeleteOldTPushes()
+
+	If $iAlertTLastRaidTxt = 1 Then
+		GUICtrlSetState($chkAlertTLastRaidTxt, $GUI_CHECKED)
+	ElseIf $iAlertTLastRaidTxt = 0 Then
+		GUICtrlSetState($chkAlertTLastRaidTxt, $GUI_UNCHECKED)
+	EndIf
+
+	If $ichkAlertTCampFull = 1 Then
+		GUICtrlSetState($chkAlertTCampFull, $GUI_CHECKED)
+	ElseIf $ichkAlertTCampFull = 0 Then
+		GUICtrlSetState($chkAlertTCampFull, $GUI_UNCHECKED)
+	EndIf
+
+	If $iAlertTVillage = 1 Then
+		GUICtrlSetState($chkAlertTVillage, $GUI_CHECKED)
+	ElseIf $iAlertTVillage = 0 Then
+		GUICtrlSetState($chkAlertTVillage, $GUI_UNCHECKED)
+	EndIf
+
+	If $iLastAttackT = 1 Then
+		GUICtrlSetState($chkAlertTLastAttack, $GUI_CHECKED)
+	ElseIf $iLastAttackT = 0 Then
+		GUICtrlSetState($chkAlertTLastAttack, $GUI_UNCHECKED)
+	EndIf
+	GUICtrlSetData($TelegramTokenValue, $TelegramToken)
+	GUICtrlSetData($OrigTelegram, $iOrigTelegram)
+	;Telegram
 
 	; apply notify PushBullet
 	If $PushBulletEnabled = 1 Then

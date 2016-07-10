@@ -352,7 +352,7 @@ Global $ScreenshotLootInfo = False
 Global $AlertSearch = True
 Global $iChkAttackNow, $iAttackNowDelay, $bBtnAttackNowPressed = False
 Global $PushBulletToken = ""
-Global $TelegramToken = ""
+;Global $TelegramToken = ""
 
 Global $iGUIMasterWidth = 470
 Global $iGUIMasterHeight = 650
@@ -374,6 +374,37 @@ $sModeText[$MA] = "Milking Attack"
 
 Global $iAtkAlgorithm[$iModeCount]
 
+;Telegram[Surbiks]
+Global $TelegramUrl = "https://api.telegram.org/bot"
+Global $TelegramToken = ""
+Global $TRemoteControlInterval = 40000;60000 ; 40 secs
+Global $TDeleteOldPushesInterval = 1800000 ; 30 mins
+Global $iOrigTelegram
+Global $iLastAttackT
+Global $iAlertTVillage
+Global $TelegramEnabled
+Global $iAlertTLastRaidTxt
+Global $iDeleteAllTPushes = 0
+Global $iDeleteAllTPushesNow = False
+Global $icmbHoursTelegram
+Global $ichkAlertTCampFull
+Global $ichkAlertTCampFullTest = 0
+Global $pRemoteTelegram
+Global $pMatchFoundTelegram
+Global $pLastRaidImgTelegram
+Global $pWallUpgradeTelegram
+Global $pOOSTelegram
+Global $pAnotherDeviceTelegram
+Global $pTakeAbreakTelegram
+Global $CampStatus = ""
+
+Global $TelegramFirst = 0
+Global $TelegramChatIDs
+Global $TelegramLastRemoteID = 0
+Global $TelegramRequestScreenshot = 0
+Global $TelegramRequestScreenshotIDs
+;Telegram
+
 ;PushBullet---------------------------------------------------------------
 Global $PBRemoteControlInterval = 60000 ; 60 secs
 Global $PBDeleteOldPushesInterval = 1800000 ; 30 mins
@@ -381,6 +412,7 @@ Global $iOrigPushBullet
 Global $iLastAttackPB
 Global $iAlertPBVillage
 Global $PushBulletEnabled
+Global $TelegramEnabled
 Global $pRemote
 Global $pMatchFound
 Global $pLastRaidImg
@@ -390,12 +422,19 @@ Global $pOOS
 Global $pTakeAbreak
 Global $pAnotherDevice
 Global $iDeleteAllPBPushes = 0
+Global $iDeleteAllTPushes = 0
 Global $iDeleteAllPBPushesNow = False
+Global $iDeleteAllTPushesNow = False
 Global $ichkDeleteOldPBPushes
+Global $ichkDeleteOldTPushes
 Global $icmbHoursPushBullet
+Global $icmbHoursTelegram
 Global $chkDeleteAllPBPushes
+Global $chkDeleteAllTPushes
 Global $ichkAlertPBCampFull
+Global $ichkAlertTCampFull
 Global $ichkAlertPBCampFullTest = 0
+Global $ichkAlertTCampFullTest = 0
 
 Global $sLogFName
 Global $sAttackLogFName
